@@ -150,3 +150,49 @@ test('reordering rejects links that are not the user\'s', function () {
     $response->assertUnprocessable();
     expect($foreign->refresh()->position)->toBe(5);
 });
+
+test('a user can schedule and highlight a link', function () {
+    $page = Page::factory()->create();
+    $link = Link::factory()->create(['page_id' => $page->id]);
+
+    $response = $this->actingAs($page->user)->patch("/links/{$link->id}", [
+        'title' => 'Launch',
+        'url' => 'https://example.com/launch',
+        'starts_at' => '2030-01-01T10:00',
+        'ends_at' => '2030-01-02T10:00',
+        'is_highlighted' => 1,
+        'show_countdown' => 1,
+    ]);
+
+    $response->assertRedirect('/dashboard');
+    expect($link->refresh())
+        ->is_highlighted->toBeTrue()
+        ->show_countdown->toBeTrue()
+        ->starts_at->format('Y-m-d H:i')->toBe('2030-01-01 10:00')
+        ->ends_at->format('Y-m-d H:i')->toBe('2030-01-02 10:00');
+});
+
+test('an end date before the start date is rejected', function () {
+    $page = Page::factory()->create();
+    $link = Link::factory()->create(['page_id' => $page->id]);
+
+    $response = $this->actingAs($page->user)->patch("/links/{$link->id}", [
+        'title' => 'Launch',
+        'url' => 'https://example.com',
+        'starts_at' => '2030-01-02T10:00',
+        'ends_at' => '2030-01-01T10:00',
+    ]);
+
+    $response->assertSessionHasErrors('ends_at');
+});
+
+test('the quick visibility toggle does not clear the schedule', function () {
+    $page = Page::factory()->create();
+    $link = Link::factory()->scheduled(now()->addDay())->create(['page_id' => $page->id]);
+
+    $this->actingAs($page->user)->patch("/links/{$link->id}", ['is_visible' => 0]);
+
+    expect($link->refresh())
+        ->is_visible->toBeFalse()
+        ->starts_at->not->toBeNull();
+});

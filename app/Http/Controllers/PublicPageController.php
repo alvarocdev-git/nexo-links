@@ -17,7 +17,9 @@ class PublicPageController extends Controller
 
         return view('pages.show', [
             'page' => $page,
-            'links' => $page->links->filter(fn (Link $link): bool => $link->isPublished())->values(),
+            'links' => $page->links
+                ->filter(fn (Link $link): bool => $link->isPublished() || $link->isUpcoming())
+                ->values(),
         ]);
     }
 }

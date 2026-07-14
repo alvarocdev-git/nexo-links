@@ -39,6 +39,9 @@
                         <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url')" required maxlength="2048" placeholder="https://…" />
                         <x-input-error :messages="$errors->get('url')" class="mt-2" />
                     </div>
+
+                    @include('links.fields')
+
                     <div class="flex items-center gap-4">
                         <x-primary-button>{{ __('Save') }}</x-primary-button>
                         <button type="button" @click="open = false" class="text-sm text-gray-600 hover:text-gray-900">{{ __('Cancel') }}</button>
@@ -64,10 +67,19 @@
 
                                 <div class="flex-1 min-w-0">
                                     <p class="font-medium text-gray-900 truncate">
+                                        @if ($link->is_highlighted)
+                                            <span class="text-amber-500" title="{{ __('Highlighted') }}">★</span>
+                                        @endif
                                         {{ $link->title }}
                                         @unless ($link->is_visible)
                                             <span class="ms-1 inline-block rounded bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">{{ __('Hidden') }}</span>
                                         @endunless
+                                        @if ($link->starts_at?->isFuture())
+                                            <span class="ms-1 inline-block rounded bg-indigo-50 px-1.5 py-0.5 text-xs text-indigo-600" title="{{ $link->starts_at }}">{{ __('Scheduled') }}</span>
+                                        @endif
+                                        @if ($link->ends_at?->isPast())
+                                            <span class="ms-1 inline-block rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-700" title="{{ $link->ends_at }}">{{ __('Expired') }}</span>
+                                        @endif
                                     </p>
                                     <p class="text-sm text-gray-500 truncate">{{ $link->url }}</p>
                                 </div>
@@ -106,6 +118,9 @@
                                     <x-input-label :value="__('URL')" />
                                     <x-text-input name="url" type="text" class="mt-1 block w-full" :value="old('editing') == $link->id ? old('url') : $link->url" required maxlength="2048" />
                                 </div>
+
+                                @include('links.fields', ['link' => $link])
+
                                 <div class="flex items-center gap-4">
                                     <x-primary-button>{{ __('Save') }}</x-primary-button>
                                     <button type="button" @click="editing = false" class="text-sm text-gray-600 hover:text-gray-900">{{ __('Cancel') }}</button>

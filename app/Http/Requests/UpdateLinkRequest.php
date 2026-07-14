@@ -24,6 +24,10 @@ class UpdateLinkRequest extends FormRequest
             'title' => ['sometimes', 'required', 'string', 'max:120'],
             'url' => ['sometimes', 'required', 'string', 'max:2048', new LinkUrl],
             'is_visible' => ['sometimes', 'boolean'],
+            'is_highlighted' => ['sometimes', 'boolean'],
+            'show_countdown' => ['sometimes', 'boolean'],
+            'starts_at' => ['nullable', 'date'],
+            'ends_at' => ['nullable', 'date', 'after:starts_at'],
         ];
     }
 }

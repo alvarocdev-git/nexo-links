@@ -35,7 +35,15 @@
         <ul class="mt-10 space-y-4">
             @foreach ($links as $link)
                 <li>
-                    @if ($link->is_highlighted)
+                    @if ($link->isUpcoming())
+                        <div data-countdown="{{ $link->starts_at->getTimestamp() }}"
+                             class="rounded-2xl border border-dashed border-neutral-300 bg-white/60 px-5 py-4 text-center dark:border-neutral-700 dark:bg-neutral-900/60">
+                            <p class="font-medium text-neutral-700 dark:text-neutral-300">{{ $link->title }}</p>
+                            <p class="mt-1 text-sm tabular-nums text-neutral-500" aria-live="off">
+                                {{ __('starts in') }} <span data-countdown-label>…</span>
+                            </p>
+                        </div>
+                    @elseif ($link->is_highlighted)
                         <a href="{{ route('link.visit', $link) }}" data-highlighted rel="noopener"
                            class="group relative block overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 to-fuchsia-600 px-5 py-4 text-center font-semibold text-white shadow-lg shadow-indigo-500/20 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-fuchsia-500/30 motion-reduce:transition-none">
                             <span class="absolute left-4 top-1/2 -mt-1 h-2 w-2 animate-pulse rounded-full bg-white/90 motion-reduce:animate-none" aria-hidden="true"></span>
@@ -62,5 +70,35 @@
             </a>
         </footer>
     </main>
+
+    @if ($links->contains(fn ($link) => $link->isUpcoming()))
+        <script>
+            document.querySelectorAll('[data-countdown]').forEach((el) => {
+                const target = Number(el.dataset.countdown) * 1000;
+                const label = el.querySelector('[data-countdown-label]');
+                let timer;
+
+                const tick = () => {
+                    const seconds = Math.floor((target - Date.now()) / 1000);
+
+                    if (seconds <= 0) {
+                        if (timer) clearInterval(timer);
+                        window.location.reload();
+                        return;
+                    }
+
+                    const pad = (n) => String(n).padStart(2, '0');
+                    const days = Math.floor(seconds / 86400);
+                    label.textContent = (days > 0 ? days + 'd ' : '')
+                        + pad(Math.floor((seconds % 86400) / 3600))
+                        + ':' + pad(Math.floor((seconds % 3600) / 60))
+                        + ':' + pad(seconds % 60);
+                };
+
+                tick();
+                timer = setInterval(tick, 1000);
+            });
+        </script>
+    @endif
 </body>
 </html>

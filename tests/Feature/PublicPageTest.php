@@ -85,3 +85,30 @@ test('reserved app routes are not shadowed by the catch-all', function () {
     $this->get('/register')->assertOk();
     $this->get('/login')->assertOk();
 });
+
+test('an upcoming link with countdown shows a teaser instead of a link', function () {
+    $page = Page::factory()->create();
+    $link = Link::factory()->scheduled(now()->addDays(2))->create([
+        'page_id' => $page->id,
+        'title' => 'Big launch',
+        'show_countdown' => true,
+    ]);
+
+    $response = $this->get('/'.$page->username);
+
+    $response->assertOk()
+        ->assertSee('Big launch')
+        ->assertSee('data-countdown', false)
+        ->assertDontSee(route('link.visit', $link));
+});
+
+test('an upcoming link without countdown stays hidden', function () {
+    $page = Page::factory()->create();
+    Link::factory()->scheduled(now()->addDays(2))->create([
+        'page_id' => $page->id,
+        'title' => 'Silent launch',
+        'show_countdown' => false,
+    ]);
+
+    $this->get('/'.$page->username)->assertOk()->assertDontSee('Silent launch');
+});

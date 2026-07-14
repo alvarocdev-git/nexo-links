@@ -20,6 +20,10 @@ class StoreLinkRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:120'],
             'url' => ['required', 'string', 'max:2048', new LinkUrl],
+            'is_highlighted' => ['sometimes', 'boolean'],
+            'show_countdown' => ['sometimes', 'boolean'],
+            'starts_at' => ['nullable', 'date'],
+            'ends_at' => ['nullable', 'date', 'after:starts_at'],
         ];
     }
 }

@@ -67,6 +67,18 @@ class Link extends Model
     }
 
     /**
+     * Whether the link should appear as a countdown teaser: visible,
+     * opted into the countdown, and not started yet.
+     */
+    public function isUpcoming(): bool
+    {
+        return $this->is_visible
+            && $this->show_countdown
+            && $this->starts_at !== null
+            && $this->starts_at->isFuture();
+    }
+
+    /**
      * Whether the link should be shown on the public page right now.
      */
     public function isPublished(): bool
