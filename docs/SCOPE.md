@@ -44,6 +44,12 @@ What Nexo solves that mainstream alternatives don't:
 - Multilingual interface: Spanish, English and Portuguese, with a visible
   language switcher that updates everything instantly (public pages pick
   the visitor's browser language by default)
+- Help center ("What can I do in Nexo?"): short guides for every feature —
+  create an account, add links, schedule, read analytics, share the QR —
+  translatable and linked from the landing and the dashboard
+- Report system: visitors can report a page or a specific link (broken,
+  malicious, abusive); the page owner sees a notification in their panel
+  and the instance admin can review reports
 - Production deploy on shared hosting (Hostinger, PHP + MySQL)
 
 ## Design principles
