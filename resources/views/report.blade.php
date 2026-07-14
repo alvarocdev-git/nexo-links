@@ -7,6 +7,8 @@
 
     <title>{{ __('Report this page') }} · {{ config('app.name') }}</title>
 
+    @include('partials.brand-head')
+
     @vite('resources/css/app.css')
 </head>
 <body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50" style="font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">

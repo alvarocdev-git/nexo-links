@@ -70,13 +70,18 @@
     <meta name="description" content="{{ __('What can I do in :app?', ['app' => config('app.name')]) }}">
     <link rel="canonical" href="{{ route('help') }}">
 
+    @include('partials.brand-head')
+
     @vite('resources/css/app.css')
 </head>
 <body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50" style="font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">
     <div class="mx-auto flex min-h-screen w-full max-w-2xl flex-col px-5">
 
         <nav class="flex items-center justify-between py-6">
-            <a href="{{ route('home') }}" class="text-lg font-bold tracking-tight">{{ config('app.name') }}</a>
+            <a href="{{ route('home') }}" class="flex items-center gap-2 text-lg font-bold tracking-tight">
+                <x-application-logo class="h-6 w-6" />
+                {{ config('app.name') }}
+            </a>
             <div class="flex items-center gap-4 text-sm">
                 <x-language-switcher />
                 @auth

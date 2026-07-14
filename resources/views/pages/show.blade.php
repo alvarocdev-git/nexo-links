@@ -23,6 +23,8 @@
     @endif
     <meta name="twitter:card" content="summary">
 
+    @include('partials.brand-head')
+
     @vite('resources/css/app.css')
 </head>
 <body @class([

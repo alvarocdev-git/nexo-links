@@ -12,7 +12,10 @@
     <meta property="og:title" content="{{ config('app.name') }} — {{ __('Your links. Your domain. Your data.') }}">
     <meta property="og:description" content="{{ __('Open-source link-in-bio page you host yourself, with visitor analytics that don\'t spy on anyone.') }}">
     <meta property="og:url" content="{{ url('/') }}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="{{ asset('og-image.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    @include('partials.brand-head')
 
     @vite('resources/css/app.css')
 </head>
@@ -21,7 +24,10 @@
 
         <!-- Nav -->
         <nav class="flex items-center justify-between py-6">
-            <span class="text-lg font-bold tracking-tight">{{ config('app.name') }}</span>
+            <span class="flex items-center gap-2 text-lg font-bold tracking-tight">
+                <x-application-logo class="h-6 w-6" />
+                {{ config('app.name') }}
+            </span>
             <div class="flex items-center gap-4 text-sm">
                 <x-language-switcher />
                 @auth
