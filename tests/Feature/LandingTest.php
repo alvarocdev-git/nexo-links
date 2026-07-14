@@ -4,6 +4,8 @@ use App\Models\Page;
 use App\Models\User;
 
 test('the landing page renders with CTAs for guests', function () {
+    Page::factory()->create(['username' => config('nexo.example_username')]);
+
     $response = $this->get('/');
 
     $response->assertOk()
@@ -12,6 +14,12 @@ test('the landing page renders with CTAs for guests', function () {
         ->assertSee(route('login'))
         ->assertSee('See a live example')
         ->assertSee(url('/'.config('nexo.example_username')));
+});
+
+test('the example button is hidden when the example page does not exist', function () {
+    $this->get('/')
+        ->assertOk()
+        ->assertDontSee('See a live example');
 });
 
 test('authenticated users see the dashboard link instead of register', function () {

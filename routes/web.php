@@ -11,10 +11,15 @@ use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SocialLinkController;
+use App\Models\Page;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('landing');
+    return view('landing', [
+        'exampleUsername' => Page::query()
+            ->where('username', config('nexo.example_username'))
+            ->value('username'),
+    ]);
 })->name('home');
 
 Route::view('/help', 'help')->name('help');
