@@ -112,3 +112,48 @@ test('an upcoming link without countdown stays hidden', function () {
 
     $this->get('/'.$page->username)->assertOk()->assertDontSee('Silent launch');
 });
+
+test('a custom solid background is applied with readable ink', function () {
+    $page = Page::factory()->create([
+        'background_type' => 'solid',
+        'background_start' => '#111111',
+    ]);
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertSee('background: #111111', false)
+        ->assertSee('text-neutral-50', false);
+});
+
+test('a gradient background renders both colors', function () {
+    $page = Page::factory()->create([
+        'background_type' => 'gradient',
+        'background_start' => '#ffffff',
+        'background_end' => '#aabbcc',
+    ]);
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertSee('linear-gradient(160deg, #ffffff, #aabbcc)', false);
+});
+
+test('the theme accent is used for highlighted links', function () {
+    $page = Page::factory()->create(['theme' => 'sunset']);
+    Link::factory()->highlighted()->create(['page_id' => $page->id]);
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertSee('#f97316', false);
+});
+
+test('avatar and banner images are rendered when set', function () {
+    $page = Page::factory()->create([
+        'avatar_path' => 'avatars/me.png',
+        'banner_path' => 'banners/hero.png',
+    ]);
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertSee('/storage/avatars/me.png')
+        ->assertSee('/storage/banners/hero.png');
+});

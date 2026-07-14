@@ -19,6 +19,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Theme Presets
+    |--------------------------------------------------------------------------
+    |
+    | Accent palettes a page owner can pick. "from"/"to" define the gradient
+    | used for the avatar ring and highlighted links.
+    |
+    */
+
+    'themes' => [
+        'default' => ['label' => 'Nexo', 'from' => '#6366f1', 'to' => '#d946ef'],
+        'ocean' => ['label' => 'Ocean', 'from' => '#0ea5e9', 'to' => '#6366f1'],
+        'sunset' => ['label' => 'Sunset', 'from' => '#f97316', 'to' => '#db2777'],
+        'forest' => ['label' => 'Forest', 'from' => '#10b981', 'to' => '#0d9488'],
+        'mono' => ['label' => 'Mono', 'from' => '#171717', 'to' => '#525252'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Reserved Usernames
     |--------------------------------------------------------------------------
     |
