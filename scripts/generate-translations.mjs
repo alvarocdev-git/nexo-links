@@ -129,6 +129,53 @@ const nexo = {
             'Tu página vive en tu propio dominio y servidor. Ninguna plataforma puede cobrarte por ella, romper tu URL ni cerrarla.',
         'starts in': 'empieza en',
         'Language': 'Idioma',
+        'Help': 'Ayuda',
+        'Help topics': 'Temas de ayuda',
+        'What can I do in :app?': '¿Qué puedo hacer en :app?',
+        'Create your account': 'Crea tu cuenta',
+        'Click "Create your page" and choose a username — it becomes your public URL.':
+            'Haz clic en "Crea tu página" y elige un nombre de usuario — será tu URL pública.',
+        'Verify your email address with the link we send you.':
+            'Verifica tu email con el enlace que te enviamos.',
+        'Your page is immediately live at /your-username.':
+            'Tu página queda publicada al instante en /tu-usuario.',
+        'Add and organize your links': 'Agrega y organiza tus links',
+        'In the dashboard, press "+ Add link" and give it a title and a URL.':
+            'En el panel, presiona "+ Agregar link" y ponle un título y una URL.',
+        'Drag the handle on the left of each card to reorder.':
+            'Arrastra el asa a la izquierda de cada tarjeta para reordenar.',
+        'Use Hide to keep a link without showing it, and Edit to change it anytime.':
+            'Usa Ocultar para conservar un link sin mostrarlo, y Editar para cambiarlo cuando quieras.',
+        'Schedule, highlight and countdowns': 'Programación, destacados y cuentas regresivas',
+        'When creating or editing a link, set optional start and end dates — it publishes and unpublishes itself.':
+            'Al crear o editar un link, define fechas de inicio y fin opcionales — se publica y despublica solo.',
+        'Mark "Highlight this link" to give it the accent color treatment.':
+            'Marca "Destacar este link" para darle el color de acento.',
+        'Enable the countdown to tease a launch: visitors see a live timer until it starts.':
+            'Activa la cuenta regresiva para anticipar un lanzamiento: los visitantes ven un contador en vivo hasta que empiece.',
+        'Contact buttons and WhatsApp': 'Botones de contacto y WhatsApp',
+        'Links accept https://, mailto: and tel: — so a button can send an email or call you.':
+            'Los links aceptan https://, mailto: y tel: — así un botón puede enviar un email o llamarte.',
+        'Use "Build a WhatsApp link" to generate a wa.me link with a prefilled message.':
+            'Usa "Armar un link de WhatsApp" para generar un enlace wa.me con mensaje precargado.',
+        'In "Social icons", pick a platform and enter your handle, email or phone.':
+            'En "Iconos sociales", elige una plataforma e ingresa tu usuario, email o teléfono.',
+        'Make it yours': 'Hazla tuya',
+        'In Design, upload an avatar and a banner, and write your bio.':
+            'En Diseño, sube un avatar y un banner, y escribe tu bio.',
+        'Pick an accent palette and a background: default, solid color or gradient.':
+            'Elige una paleta de acento y un fondo: por defecto, color sólido o degradado.',
+        'Text color adapts automatically so your page stays readable.':
+            'El color del texto se adapta automáticamente para que tu página siga siendo legible.',
+        'Understand your analytics': 'Entiende tus estadísticas',
+        'Analytics shows total clicks, unique visitors, clicks per day and your top referrers.':
+            'Estadísticas muestra clics totales, visitantes únicos, clics por día y tus principales referentes.',
+        'Numbers are collected without cookies and without storing personal data — visitors are never tracked across days.':
+            'Los números se recolectan sin cookies y sin guardar datos personales — nunca se rastrea a un visitante entre días.',
+        'Copy your URL from "Share your page" in the dashboard.':
+            'Copia tu URL desde "Comparte tu página" en el panel.',
+        'Download your QR code as SVG — print it anywhere, it always points to your page.':
+            'Descarga tu código QR en SVG — imprímelo donde quieras, siempre apunta a tu página.',
     },
     pt_BR: {
         ':count click|:count clicks': ':count clique|:count cliques',
@@ -250,6 +297,53 @@ const nexo = {
             'Sua página vive no seu próprio domínio e servidor. Nenhuma plataforma pode cobrar por ela, quebrar sua URL nem encerrá-la.',
         'starts in': 'começa em',
         'Language': 'Idioma',
+        'Help': 'Ajuda',
+        'Help topics': 'Tópicos de ajuda',
+        'What can I do in :app?': 'O que posso fazer no :app?',
+        'Create your account': 'Crie sua conta',
+        'Click "Create your page" and choose a username — it becomes your public URL.':
+            'Clique em "Crie sua página" e escolha um nome de usuário — ele vira a sua URL pública.',
+        'Verify your email address with the link we send you.':
+            'Verifique seu e-mail com o link que enviamos.',
+        'Your page is immediately live at /your-username.':
+            'Sua página fica no ar na hora em /seu-usuario.',
+        'Add and organize your links': 'Adicione e organize seus links',
+        'In the dashboard, press "+ Add link" and give it a title and a URL.':
+            'No painel, clique em "+ Adicionar link" e dê um título e uma URL.',
+        'Drag the handle on the left of each card to reorder.':
+            'Arraste a alça à esquerda de cada cartão para reordenar.',
+        'Use Hide to keep a link without showing it, and Edit to change it anytime.':
+            'Use Ocultar para manter um link sem exibi-lo, e Editar para alterá-lo quando quiser.',
+        'Schedule, highlight and countdowns': 'Agendamento, destaques e contagens regressivas',
+        'When creating or editing a link, set optional start and end dates — it publishes and unpublishes itself.':
+            'Ao criar ou editar um link, defina datas de início e fim opcionais — ele se publica e despublica sozinho.',
+        'Mark "Highlight this link" to give it the accent color treatment.':
+            'Marque "Destacar este link" para dar a ele a cor de destaque.',
+        'Enable the countdown to tease a launch: visitors see a live timer until it starts.':
+            'Ative a contagem regressiva para antecipar um lançamento: os visitantes veem um cronômetro ao vivo até começar.',
+        'Contact buttons and WhatsApp': 'Botões de contato e WhatsApp',
+        'Links accept https://, mailto: and tel: — so a button can send an email or call you.':
+            'Os links aceitam https://, mailto: e tel: — assim um botão pode enviar um e-mail ou ligar para você.',
+        'Use "Build a WhatsApp link" to generate a wa.me link with a prefilled message.':
+            'Use "Criar um link de WhatsApp" para gerar um link wa.me com mensagem pré-preenchida.',
+        'In "Social icons", pick a platform and enter your handle, email or phone.':
+            'Em "Ícones sociais", escolha uma plataforma e informe seu usuário, e-mail ou telefone.',
+        'Make it yours': 'Deixe com a sua cara',
+        'In Design, upload an avatar and a banner, and write your bio.':
+            'Em Design, envie um avatar e um banner, e escreva sua bio.',
+        'Pick an accent palette and a background: default, solid color or gradient.':
+            'Escolha uma paleta de destaque e um fundo: padrão, cor sólida ou degradê.',
+        'Text color adapts automatically so your page stays readable.':
+            'A cor do texto se adapta automaticamente para sua página continuar legível.',
+        'Understand your analytics': 'Entenda suas estatísticas',
+        'Analytics shows total clicks, unique visitors, clicks per day and your top referrers.':
+            'Estatísticas mostra o total de cliques, visitantes únicos, cliques por dia e suas principais referências.',
+        'Numbers are collected without cookies and without storing personal data — visitors are never tracked across days.':
+            'Os números são coletados sem cookies e sem armazenar dados pessoais — nenhum visitante é rastreado entre dias.',
+        'Copy your URL from "Share your page" in the dashboard.':
+            'Copie sua URL em "Compartilhe sua página" no painel.',
+        'Download your QR code as SVG — print it anywhere, it always points to your page.':
+            'Baixe seu código QR em SVG — imprima onde quiser, ele sempre aponta para a sua página.',
     },
 };
 

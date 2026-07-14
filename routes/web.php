@@ -14,6 +14,8 @@ Route::get('/', function () {
     return view('landing');
 })->name('home');
 
+Route::view('/help', 'help')->name('help');
+
 Route::get('/l/{link}', ClickRedirectController::class)->name('link.visit');
 
 Route::middleware(['auth', 'verified'])->group(function () {
