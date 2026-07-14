@@ -4,6 +4,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Footer Attribution
+    |--------------------------------------------------------------------------
+    |
+    | Shown at the bottom of every public page. Each instance can brand it
+    | via env, e.g. "powered by alvarocdev.com" pointing to your site.
+    |
+    */
+
+    'attribution' => [
+        'label' => env('NEXO_ATTRIBUTION_LABEL', 'made with Nexo'),
+        'url' => env('NEXO_ATTRIBUTION_URL', 'https://github.com/alvarocdev-git/nexo-links'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Reserved Usernames
     |--------------------------------------------------------------------------
     |

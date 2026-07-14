@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,3 +24,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Catch-all public page route: must stay last so it never shadows app routes.
+Route::get('/{username}', [PublicPageController::class, 'show'])
+    ->where('username', '[a-z0-9]+(?:[-_][a-z0-9]+)*')
+    ->name('page.show');
