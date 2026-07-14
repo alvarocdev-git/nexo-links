@@ -921,5 +921,9 @@
     "Open": "Abierto",
     "Mark as resolved": "Marcar como resuelto",
     "You have :count open report.|You have :count open reports.": "Tienes :count reporte abierto.|Tienes :count reportes abiertos.",
-    "Review reports": "Ver reportes"
+    "Review reports": "Ver reportes",
+    "Skip to content": "Saltar al contenido",
+    "Platform": "Plataforma",
+    "Country code": "Código de país",
+    "Phone number": "Número de teléfono"
 }

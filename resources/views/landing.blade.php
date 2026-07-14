@@ -46,11 +46,11 @@
 
             <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <a href="{{ route('register') }}"
-                   class="rounded-full bg-gradient-to-r from-indigo-600 to-fuchsia-600 px-6 py-3 font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5 hover:shadow-xl motion-reduce:transition-none">
+                   class="rounded-full bg-gradient-to-r from-indigo-600 to-fuchsia-600 px-6 py-3 font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 motion-reduce:transition-none">
                     {{ __('Create your page — it\'s free') }}
                 </a>
                 <a href="{{ url('/'.config('nexo.example_username')) }}"
-                   class="rounded-full border border-neutral-300 px-6 py-3 font-medium transition hover:border-neutral-400 hover:bg-white dark:border-neutral-700 dark:hover:border-neutral-500 dark:hover:bg-neutral-900 motion-reduce:transition-none">
+                   class="rounded-full border border-neutral-300 px-6 py-3 font-medium transition hover:border-neutral-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-neutral-700 dark:hover:border-neutral-500 dark:hover:bg-neutral-900 motion-reduce:transition-none">
                     {{ __('See a live example') }} ↗
                 </a>
             </div>

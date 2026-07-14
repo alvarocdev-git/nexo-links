@@ -50,7 +50,7 @@
                     @endforeach
                 </div>
 
-                <div class="mt-1 flex justify-between text-xs text-gray-400">
+                <div class="mt-1 flex justify-between text-xs text-gray-500">
                     <span>{{ $series->first()['day'] }}</span>
                     <span>{{ $series->last()['day'] }}</span>
                 </div>

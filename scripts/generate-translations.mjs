@@ -201,6 +201,10 @@ const nexo = {
         'You have :count open report.|You have :count open reports.':
             'Tienes :count reporte abierto.|Tienes :count reportes abiertos.',
         'Review reports': 'Ver reportes',
+        'Skip to content': 'Saltar al contenido',
+        'Platform': 'Plataforma',
+        'Country code': 'Código de país',
+        'Phone number': 'Número de teléfono',
     },
     pt_BR: {
         ':count click|:count clicks': ':count clique|:count cliques',
@@ -394,6 +398,10 @@ const nexo = {
         'You have :count open report.|You have :count open reports.':
             'Você tem :count denúncia aberta.|Você tem :count denúncias abertas.',
         'Review reports': 'Ver denúncias',
+        'Skip to content': 'Pular para o conteúdo',
+        'Platform': 'Plataforma',
+        'Country code': 'Código do país',
+        'Phone number': 'Número de telefone',
     },
 };
 

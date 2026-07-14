@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Link;
 use App\Models\Page;
 
 test('security headers are sent on public pages', function () {
@@ -55,4 +56,25 @@ test('password reset requests are rate limited', function () {
     }
 
     $this->post('/forgot-password', ['email' => 'someone@example.com'])->assertTooManyRequests();
+});
+
+test('accessibility basics: skip link, form labels and expanded state', function () {
+    $page = Page::factory()->create();
+
+    $this->actingAs($page->user)->get('/dashboard')
+        ->assertOk()
+        ->assertSee('Skip to content')
+        ->assertSee('id="main"', false)
+        ->assertSee('aria-label="Platform"', false)
+        ->assertSee('aria-label="Country code"', false)
+        ->assertSee('aria-expanded', false);
+});
+
+test('public pages keep focus-visible styles on interactive elements', function () {
+    $page = Page::factory()->create();
+    Link::factory()->create(['page_id' => $page->id]);
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertSee('focus-visible:ring-2', false);
 });

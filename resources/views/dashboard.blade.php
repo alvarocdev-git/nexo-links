@@ -36,7 +36,7 @@
 
             <!-- Add link -->
             <div class="bg-white shadow-sm sm:rounded-lg p-6" x-data="{ open: {{ $errors->hasAny(['title', 'url']) && ! old('editing') ? 'true' : 'false' }} }">
-                <button type="button" x-show="! open" @click="open = true" class="w-full text-center text-sm font-medium text-indigo-600 hover:text-indigo-900">
+                <button type="button" x-show="! open" @click="open = true" x-bind:aria-expanded="open" class="w-full text-center text-sm font-medium text-indigo-600 hover:text-indigo-900">
                     + {{ __('Add link') }}
                 </button>
 
@@ -95,7 +95,7 @@
                     @foreach ($links as $link)
                         <li data-link-id="{{ $link->id }}" class="bg-white shadow-sm sm:rounded-lg p-4" x-data="{ editing: {{ $errors->hasAny(['title', 'url']) && old('editing') == $link->id ? 'true' : 'false' }} }">
                             <div class="flex items-center gap-3">
-                                <button type="button" data-drag-handle class="cursor-grab text-gray-400 hover:text-gray-600 touch-none" aria-label="{{ __('Drag to reorder') }}">
+                                <button type="button" data-drag-handle class="cursor-grab text-gray-500 hover:text-gray-700 touch-none" aria-label="{{ __('Drag to reorder') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path d="M7 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9-13a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
                                     </svg>
@@ -132,7 +132,7 @@
                                         </button>
                                     </form>
 
-                                    <button type="button" @click="editing = ! editing" class="text-sm text-gray-600 hover:text-gray-900 underline">{{ __('Edit') }}</button>
+                                    <button type="button" @click="editing = ! editing" x-bind:aria-expanded="editing" class="text-sm text-gray-600 hover:text-gray-900 underline">{{ __('Edit') }}</button>
 
                                     <form method="POST" action="{{ route('links.destroy', $link) }}" onsubmit="return confirm('{{ __('Delete this link?') }}')">
                                         @csrf
@@ -177,7 +177,7 @@
                         @foreach ($socialLinks as $social)
                             <li class="flex items-center gap-2 rounded-full border border-gray-200 py-1 ps-3 pe-1">
                                 <span class="text-sm text-gray-800">{{ $social->label() }}</span>
-                                <span class="text-sm text-gray-400 max-w-32 truncate">{{ $social->value }}</span>
+                                <span class="text-sm text-gray-500 max-w-32 truncate">{{ $social->value }}</span>
                                 <form method="POST" action="{{ route('socials.destroy', $social) }}">
                                     @csrf
                                     @method('DELETE')
@@ -199,7 +199,7 @@
                           get phoneValue() { return this.code + this.national.replace(/[^0-9]/g, '') },
                       }">
                     @csrf
-                    <select name="platform" x-model="platform" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select name="platform" x-model="platform" aria-label="{{ __('Platform') }}" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         @foreach ($socialPlatforms as $key => $platform)
                             <option value="{{ $key }}" @selected(old('platform') === $key)>{{ $platform['label'] }}</option>
                         @endforeach
@@ -208,20 +208,21 @@
                     <div class="flex-1 min-w-48">
                         <!-- Handle / email / URL -->
                         <div x-show="! isPhone" class="flex items-center gap-1">
-                            <span x-show="prefix" x-text="prefix" class="text-sm text-gray-400"></span>
+                            <span x-show="prefix" x-text="prefix" class="text-sm text-gray-500"></span>
                             <x-text-input name="value" type="text" class="block w-full text-sm" :value="old('value')"
-                                          x-bind:disabled="isPhone"
+                                          x-bind:disabled="isPhone" aria-label="{{ __('Your handle, email or URL') }}"
                                           placeholder="{{ __('Your handle, email or URL') }}" required />
                         </div>
 
                         <!-- Phone with country selector -->
                         <div x-show="isPhone" x-cloak class="flex items-center gap-2">
-                            <select x-model="code" x-bind:disabled="! isPhone" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <select x-model="code" x-bind:disabled="! isPhone" aria-label="{{ __('Country code') }}" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 @foreach ($phonePrefixes as $code => $label)
                                     <option value="{{ $code }}">{{ $label }}</option>
                                 @endforeach
                             </select>
                             <input type="text" x-model="national" inputmode="numeric" placeholder="{{ __('1122334455') }}"
+                                   aria-label="{{ __('Phone number') }}"
                                    class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <input type="hidden" name="value" x-bind:value="phoneValue" x-bind:disabled="! isPhone">
                         </div>
