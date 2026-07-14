@@ -13,6 +13,15 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
+            @if ($openReportsCount > 0)
+                <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-sm text-amber-800">
+                        {{ trans_choice('You have :count open report.|You have :count open reports.', $openReportsCount, ['count' => $openReportsCount]) }}
+                        <a href="{{ route('reports.index') }}" class="font-medium underline hover:no-underline">{{ __('Review reports') }}</a>
+                    </p>
+                </div>
+            @endif
+
             @if (session('status') === 'link-created')
                 <p class="text-sm text-green-600">{{ __('Link created.') }}</p>
             @elseif (session('status') === 'link-updated')

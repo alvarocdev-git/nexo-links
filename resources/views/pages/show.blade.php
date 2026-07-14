@@ -145,6 +145,10 @@
             </a>
             <span aria-hidden="true">·</span>
             <x-language-switcher class="gap-1.5" />
+            <span aria-hidden="true">·</span>
+            <a href="{{ route('report.create', $page->username) }}" rel="nofollow" class="transition hover:opacity-70">
+                {{ __('Report') }}
+            </a>
         </footer>
     </main>
 

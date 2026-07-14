@@ -19,6 +19,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Report Reasons
+    |--------------------------------------------------------------------------
+    |
+    | Reasons a visitor can pick when reporting a page or a link. Values
+    | are translation keys.
+    |
+    */
+
+    'report_reasons' => [
+        'broken' => 'Broken link',
+        'malicious' => 'Malicious or scam',
+        'abusive' => 'Abusive content',
+        'spam' => 'Spam',
+        'other' => 'Other',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Locales
     |--------------------------------------------------------------------------
     |
@@ -170,6 +188,8 @@ return [
         'privacy',
         'profile',
         'register',
+        'report',
+        'reports',
         'root',
         'settings',
         'setup',

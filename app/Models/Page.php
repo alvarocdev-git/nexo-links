@@ -59,6 +59,14 @@ class Page extends Model
     }
 
     /**
+     * @return HasMany<Report, $this>
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    /**
      * Inline CSS for a custom background, or null to use the default one.
      */
     public function backgroundCss(): ?string

@@ -35,6 +35,7 @@ class LinkController extends Controller
                     : '',
             ]),
             'phonePrefixes' => config('nexo.phone_prefixes'),
+            'openReportsCount' => $page->reports()->where('status', 'open')->count(),
         ]);
     }
 
