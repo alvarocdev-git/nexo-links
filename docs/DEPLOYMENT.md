@@ -1,0 +1,133 @@
+# Deploying Nexo to shared hosting (Hostinger)
+
+This guide targets Hostinger shared/Premium hosting, but applies to any host
+with **PHP 8.3+, MySQL and SSH access**. No Node.js is needed on the server —
+assets are built locally or by CI.
+
+## 1. One-time server setup
+
+### Subdomain and document root
+
+1. hPanel → **Domains → Subdomains** → create `link` (→ `link.alvarocdev.com`).
+2. The app must serve from its `public/` folder. Point the subdomain's
+   document root at `<app>/public`, e.g. app in
+   `~/domains/alvarocdev.com/nexo` → document root
+   `~/domains/alvarocdev.com/nexo/public`.
+   If hPanel doesn't let you pick a folder outside the subdomain root, create
+   the subdomain first and replace its folder with a symlink:
+   ```bash
+   rm -rf ~/domains/alvarocdev.com/public_html/link
+   ln -s ~/domains/alvarocdev.com/nexo/public ~/domains/alvarocdev.com/public_html/link
+   ```
+3. hPanel → **Security → SSL** → issue the free certificate for the subdomain.
+4. hPanel → **Advanced → PHP Configuration** → select **PHP 8.3+**.
+
+### Database
+
+hPanel → **Databases → MySQL** → create a database and user, note the
+credentials (Hostinger prefixes them, e.g. `u123456_nexo`).
+
+### Code and dependencies
+
+SSH in (hPanel → Advanced → SSH Access):
+
+```bash
+cd ~/domains/alvarocdev.com
+git clone https://github.com/alvarocdev-git/nexo-links.git nexo
+cd nexo
+composer install --no-dev --optimize-autoloader
+cp .env.example .env
+nano .env    # see the template below
+php artisan key:generate
+php artisan migrate --force
+php artisan storage:link
+php artisan config:cache && php artisan route:cache && php artisan view:cache
+```
+
+> Private repo? Add a read-only deploy key: `ssh-keygen -t ed25519`, then add
+> `~/.ssh/id_ed25519.pub` under the repo's **Settings → Deploy keys**.
+
+### Production `.env` essentials
+
+```dotenv
+APP_NAME=Nexo
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://link.alvarocdev.com
+APP_TIMEZONE=America/Argentina/Buenos_Aires
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_DATABASE=u123456_nexo
+DB_USERNAME=u123456_nexo
+DB_PASSWORD=********
+
+SESSION_SECURE_COOKIE=true
+CACHE_STORE=file
+QUEUE_CONNECTION=sync
+
+# Hostinger email account for verification/reset emails
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.hostinger.com
+MAIL_PORT=465
+MAIL_SCHEME=smtps
+MAIL_USERNAME=nexo@alvarocdev.com
+MAIL_PASSWORD=********
+MAIL_FROM_ADDRESS=nexo@alvarocdev.com
+
+NEXO_ATTRIBUTION_LABEL="powered by alvarocdev.com"
+NEXO_ATTRIBUTION_URL="https://alvarocdev.com"
+NEXO_EXAMPLE_USERNAME=alvarocdev
+```
+
+### Frontend assets (no Node on the server)
+
+Build locally and upload once:
+
+```bash
+npm ci && npm run build
+rsync -avz public/build/ user@host:~/domains/alvarocdev.com/nexo/public/build/
+```
+
+…or let the GitHub Actions workflow below handle it on every deploy.
+
+### Cron (optional, for future scheduled tasks)
+
+hPanel → **Advanced → Cron Jobs**:
+
+```
+* * * * * php ~/domains/alvarocdev.com/nexo/artisan schedule:run >> /dev/null 2>&1
+```
+
+## 2. Deploying updates
+
+### Option A — manual over SSH
+
+```bash
+cd ~/domains/alvarocdev.com/nexo && bash scripts/deploy.sh
+```
+
+Then upload `public/build/` if frontend files changed.
+
+### Option B — automated with GitHub Actions
+
+`.github/workflows/deploy.yml` builds the assets and deploys over SSH.
+Trigger it manually from the Actions tab. Configure these repository
+secrets first (**Settings → Secrets and variables → Actions**):
+
+| Secret | Example |
+| --- | --- |
+| `DEPLOY_HOST` | `123.45.67.89` (hPanel → SSH Access) |
+| `DEPLOY_PORT` | `65002` |
+| `DEPLOY_USER` | `u123456` |
+| `DEPLOY_KEY` | private SSH key with access to the server |
+| `DEPLOY_PATH` | `/home/u123456/domains/alvarocdev.com/nexo` |
+
+## 3. Post-deploy checklist
+
+- `https://link.alvarocdev.com/up` returns 200
+- Landing, `/help` and the demo page render with styles
+- Register a test account and verify the email arrives
+- Set `NEXO_EXAMPLE_USERNAME` to your real username once your page exists
+- `APP_DEBUG` is `false` and `php artisan config:cache` was re-run after
+  any `.env` change
