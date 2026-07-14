@@ -33,6 +33,7 @@ return [
         'tiktok' => ['label' => 'TikTok', 'url' => 'https://tiktok.com/@{value}', 'type' => 'handle'],
         'youtube' => ['label' => 'YouTube', 'url' => 'https://youtube.com/@{value}', 'type' => 'handle'],
         'github' => ['label' => 'GitHub', 'url' => 'https://github.com/{value}', 'type' => 'handle'],
+        'linkedin' => ['label' => 'LinkedIn', 'url' => 'https://linkedin.com/in/{value}', 'type' => 'handle'],
         'twitch' => ['label' => 'Twitch', 'url' => 'https://twitch.tv/{value}', 'type' => 'handle'],
         'facebook' => ['label' => 'Facebook', 'url' => 'https://facebook.com/{value}', 'type' => 'handle'],
         'telegram' => ['label' => 'Telegram', 'url' => 'https://t.me/{value}', 'type' => 'handle'],
@@ -40,6 +41,44 @@ return [
         'email' => ['label' => 'Email', 'url' => 'mailto:{value}', 'type' => 'email'],
         'phone' => ['label' => 'Phone', 'url' => 'tel:{value}', 'type' => 'phone'],
         'website' => ['label' => 'Website', 'url' => '{value}', 'type' => 'url'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Phone Country Codes
+    |--------------------------------------------------------------------------
+    |
+    | Codes offered in the phone/WhatsApp country selector. Users can still
+    | type any full international number by picking their code here.
+    |
+    */
+
+    'phone_prefixes' => [
+        '+54' => '🇦🇷 +54',
+        '+591' => '🇧🇴 +591',
+        '+55' => '🇧🇷 +55',
+        '+1' => '🇺🇸 +1',
+        '+56' => '🇨🇱 +56',
+        '+57' => '🇨🇴 +57',
+        '+506' => '🇨🇷 +506',
+        '+593' => '🇪🇨 +593',
+        '+503' => '🇸🇻 +503',
+        '+34' => '🇪🇸 +34',
+        '+502' => '🇬🇹 +502',
+        '+504' => '🇭🇳 +504',
+        '+52' => '🇲🇽 +52',
+        '+505' => '🇳🇮 +505',
+        '+507' => '🇵🇦 +507',
+        '+595' => '🇵🇾 +595',
+        '+51' => '🇵🇪 +51',
+        '+351' => '🇵🇹 +351',
+        '+1809' => '🇩🇴 +1809',
+        '+598' => '🇺🇾 +598',
+        '+58' => '🇻🇪 +58',
+        '+44' => '🇬🇧 +44',
+        '+49' => '🇩🇪 +49',
+        '+33' => '🇫🇷 +33',
+        '+39' => '🇮🇹 +39',
     ],
 
     /*

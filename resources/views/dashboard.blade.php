@@ -38,7 +38,7 @@
                         <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title')" required maxlength="120" />
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     </div>
-                    <div x-data="{ wa: false, phone: '', message: '' }">
+                    <div x-data="{ wa: false, code: '+54', phone: '', message: '' }">
                         <x-input-label for="url" :value="__('URL')" />
                         <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url')" required maxlength="2048" placeholder="https://…" />
                         <x-input-error :messages="$errors->get('url')" class="mt-2" />
@@ -48,14 +48,19 @@
                         </button>
 
                         <div x-show="wa" x-cloak class="mt-2 space-y-2 rounded-md bg-green-50 p-3">
-                            <div class="grid gap-2 sm:grid-cols-2">
-                                <input type="text" x-model="phone" placeholder="{{ __('Phone, e.g. +5491122334455') }}"
-                                       class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                            <div class="flex flex-wrap gap-2">
+                                <select x-model="code" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                                    @foreach ($phonePrefixes as $prefixCode => $prefixLabel)
+                                        <option value="{{ $prefixCode }}">{{ $prefixLabel }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" x-model="phone" inputmode="numeric" placeholder="{{ __('1122334455') }}"
+                                       class="block flex-1 min-w-32 rounded-md border-gray-300 text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
                                 <input type="text" x-model="message" placeholder="{{ __('Prefilled message (optional)') }}"
                                        class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
                             </div>
                             <button type="button"
-                                    @click="$el.closest('form').querySelector('#url').value = 'https://wa.me/' + phone.replace(/[^0-9]/g, '') + (message ? '?text=' + encodeURIComponent(message) : ''); wa = false"
+                                    @click="$el.closest('form').querySelector('#url').value = 'https://wa.me/' + (code + phone).replace(/[^0-9]/g, '') + (message ? '?text=' + encodeURIComponent(message) : ''); wa = false"
                                     class="rounded-md bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700">
                                 {{ __('Use this link') }}
                             </button>
@@ -174,16 +179,44 @@
                     </ul>
                 @endif
 
-                <form method="POST" action="{{ route('socials.store') }}" class="mt-4 flex flex-wrap items-start gap-3">
+                <form method="POST" action="{{ route('socials.store') }}" class="mt-4 flex flex-wrap items-start gap-3"
+                      x-data="{
+                          platform: '{{ old('platform', 'instagram') }}',
+                          code: '+54',
+                          national: '',
+                          meta: {{ Js::from($socialMeta) }},
+                          get isPhone() { return this.meta[this.platform].type === 'phone' },
+                          get prefix() { return this.meta[this.platform].prefix },
+                          get phoneValue() { return this.code + this.national.replace(/[^0-9]/g, '') },
+                      }">
                     @csrf
-                    <select name="platform" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select name="platform" x-model="platform" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         @foreach ($socialPlatforms as $key => $platform)
                             <option value="{{ $key }}" @selected(old('platform') === $key)>{{ $platform['label'] }}</option>
                         @endforeach
                     </select>
+
                     <div class="flex-1 min-w-48">
-                        <x-text-input name="value" type="text" class="block w-full text-sm" :value="old('value')"
-                                      placeholder="{{ __('Handle, email, phone or URL') }}" required />
+                        <!-- Handle / email / URL -->
+                        <div x-show="! isPhone" class="flex items-center gap-1">
+                            <span x-show="prefix" x-text="prefix" class="text-sm text-gray-400"></span>
+                            <x-text-input name="value" type="text" class="block w-full text-sm" :value="old('value')"
+                                          x-bind:disabled="isPhone"
+                                          placeholder="{{ __('Your handle, email or URL') }}" required />
+                        </div>
+
+                        <!-- Phone with country selector -->
+                        <div x-show="isPhone" x-cloak class="flex items-center gap-2">
+                            <select x-model="code" x-bind:disabled="! isPhone" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                @foreach ($phonePrefixes as $code => $label)
+                                    <option value="{{ $code }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" x-model="national" inputmode="numeric" placeholder="{{ __('1122334455') }}"
+                                   class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <input type="hidden" name="value" x-bind:value="phoneValue" x-bind:disabled="! isPhone">
+                        </div>
+
                         <x-input-error :messages="$errors->get('platform')" class="mt-1" />
                         <x-input-error :messages="$errors->get('value')" class="mt-1" />
                     </div>

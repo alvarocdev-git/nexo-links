@@ -25,6 +25,13 @@ class LinkController extends Controller
             'links' => $page->links()->withCount('clicks')->get(),
             'socialLinks' => $page->socialLinks,
             'socialPlatforms' => config('nexo.social_platforms'),
+            'socialMeta' => collect(config('nexo.social_platforms'))->map(fn (array $platform): array => [
+                'type' => $platform['type'],
+                'prefix' => str_starts_with($platform['url'], 'https://')
+                    ? str_replace('{value}', '', substr($platform['url'], 8))
+                    : '',
+            ]),
+            'phonePrefixes' => config('nexo.phone_prefixes'),
         ]);
     }
 
