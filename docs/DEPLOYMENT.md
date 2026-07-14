@@ -35,7 +35,10 @@ SSH in (hPanel → Advanced → SSH Access):
 cd ~/domains/alvarocdev.com
 git clone https://github.com/alvarocdev-git/nexo-links.git nexo
 cd nexo
-composer install --no-dev --optimize-autoloader
+# --no-scripts + manual package:discover because shared hosts usually
+# disable proc_open, which Composer needs to run post-install scripts
+composer install --no-dev --optimize-autoloader --no-scripts
+php artisan package:discover --ansi
 cp .env.example .env
 nano .env    # see the template below
 php artisan key:generate
