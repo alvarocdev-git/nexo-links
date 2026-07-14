@@ -33,6 +33,9 @@ What Nexo solves that mainstream alternatives don't:
 - Contact link types: phone (`tel:`), email (`mailto:`) and a WhatsApp link
   builder (phone + prefilled message → `wa.me` URL)
 - Profile customization: avatar, bio, color themes
+- Configurable footer attribution per instance (env): defaults to
+  "made with Nexo" → repo; the reference deploy shows
+  "powered by alvarocdev.com"
 - Production deploy on shared hosting (Hostinger, PHP + MySQL)
 
 ## Out of scope (for now)
