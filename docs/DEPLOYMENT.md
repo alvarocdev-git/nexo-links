@@ -43,7 +43,8 @@ cp .env.example .env
 nano .env    # see the template below
 php artisan key:generate
 php artisan migrate --force
-php artisan storage:link
+# storage:link needs exec(), usually disabled on shared hosts — link manually:
+ln -s "$(pwd)/storage/app/public" "$(pwd)/public/storage"
 php artisan config:cache && php artisan route:cache && php artisan view:cache
 ```
 
