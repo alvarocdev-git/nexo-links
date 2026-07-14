@@ -223,6 +223,36 @@
                     <x-primary-button>{{ __('Add') }}</x-primary-button>
                 </form>
             </div>
+
+            <!-- Share -->
+            <div class="bg-white shadow-sm sm:rounded-lg p-6">
+                <h3 class="font-medium text-gray-900">{{ __('Share your page') }}</h3>
+
+                <div class="mt-4 flex flex-wrap items-center gap-6">
+                    <img src="{{ route('qr.show') }}" alt="{{ __('QR code that opens your page') }}"
+                         class="h-32 w-32 rounded-lg border border-gray-200" width="128" height="128">
+
+                    <div class="space-y-3" x-data="{ copied: false }">
+                        <p class="text-sm text-gray-600 break-all">{{ route('page.show', $page->username) }}</p>
+
+                        <div class="flex flex-wrap gap-3">
+                            <button type="button"
+                                    @click="navigator.clipboard.writeText('{{ route('page.show', $page->username) }}').then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
+                                    class="rounded-md bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200">
+                                <span x-show="! copied">{{ __('Copy URL') }}</span>
+                                <span x-show="copied" x-cloak class="text-green-700">{{ __('Copied!') }}</span>
+                            </button>
+
+                            <a href="{{ route('qr.show', ['download' => 1]) }}"
+                               class="rounded-md bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200">
+                                {{ __('Download QR (SVG)') }}
+                            </a>
+                        </div>
+
+                        <p class="text-xs text-gray-500">{{ __('Print it, add it to a business card or a story — it always points to your page.') }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
