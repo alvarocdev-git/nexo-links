@@ -1,0 +1,300 @@
+// Builds lang/{es,pt_BR} from laravel-lang (framework + Breeze strings)
+// merged with Nexo's own translations below.
+// Run after adding new __() strings: node scripts/generate-translations.mjs
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+
+const AUTH_KEYS = ['failed', 'password', 'throttle'];
+const PASSWORD_KEYS = ['reset', 'sent', 'throttled', 'token', 'user'];
+const PAGINATION_KEYS = ['next', 'previous'];
+
+// Nexo-specific strings (and tone overrides). Keys are the English source.
+const nexo = {
+    es: {
+        ':count click|:count clicks': ':count clic|:count clics',
+        ':days days': ':days días',
+        'Accent palette': 'Paleta de acento',
+        'Add': 'Agregar',
+        'Add link': 'Agregar link',
+        "An open-source link-in-bio page you host yourself — with visitor analytics that don't spy on anyone.":
+            'Una página link-in-bio de código abierto que alojas tú mismo — con estadísticas de visitas que no espían a nadie.',
+        'Analytics': 'Estadísticas',
+        'Analytics without spying': 'Estadísticas sin espiar',
+        'Avatar, banner, color palettes, solid or gradient backgrounds — with automatic dark mode and readable text guaranteed.':
+            'Avatar, banner, paletas de colores, fondos sólidos o degradados — con modo oscuro automático y texto legible garantizado.',
+        'Background': 'Fondo',
+        'Bio': 'Bio',
+        'Build a WhatsApp link': 'Armar un link de WhatsApp',
+        'Click stats with zero cookies and zero personal data stored. No consent banner needed — private by design.':
+            'Estadísticas de clics sin cookies y sin guardar datos personales. Sin banner de consentimiento — privado por diseño.',
+        'Clicks': 'Clics',
+        'Clicks per day': 'Clics por día',
+        'Clicks per day, last :days days': 'Clics por día, últimos :days días',
+        'Copied!': '¡Copiado!',
+        'Copy URL': 'Copiar URL',
+        'Create your page': 'Crea tu página',
+        "Create your page — it's free": 'Crea tu página — es gratis',
+        'Create yours': 'Crea la tuya',
+        'Dashboard': 'Panel',
+        'Default': 'Por defecto',
+        'Delete': 'Eliminar',
+        'Delete this link?': '¿Eliminar este link?',
+        'Design': 'Diseño',
+        'Design updated.': 'Diseño actualizado.',
+        'Download QR (SVG)': 'Descargar QR (SVG)',
+        'Drag to reorder': 'Arrastrar para reordenar',
+        'Edit': 'Editar',
+        'Ends at (optional)': 'Termina el (opcional)',
+        'Expired': 'Vencido',
+        'Fast and lightweight': 'Rápido y liviano',
+        'Features': 'Características',
+        'Gradient': 'Degradado',
+        'Hidden': 'Oculto',
+        'Hide': 'Ocultar',
+        'Highlight this link': 'Destacar este link',
+        'Highlighted': 'Destacado',
+        'Link': 'Link',
+        'Link created.': 'Link creado.',
+        'Link deleted.': 'Link eliminado.',
+        'Link updated.': 'Link actualizado.',
+        'Links': 'Links',
+        'Links with superpowers': 'Links con superpoderes',
+        'Log Out': 'Cerrar sesión',
+        'Log in': 'Iniciar sesión',
+        'MIT licensed, self-hostable on cheap shared hosting (PHP + MySQL). Read the code, run your own, contribute.':
+            'Licencia MIT, autoalojable en hosting compartido económico (PHP + MySQL). Lee el código, corre el tuyo, contribuye.',
+        'No external referrers yet — clicks from your page or shared links without a referrer count as direct.':
+            'Aún no hay referentes externos — los clics desde tu página o desde links compartidos sin referente cuentan como directos.',
+        'No links yet.': 'Aún no hay links.',
+        'No links yet. Add your first one!': 'Aún no hay links. ¡Agrega el primero!',
+        'No vendor lock-in': 'Sin ataduras a plataformas',
+        'Nothing here yet.': 'Todavía no hay nada aquí.',
+        'Open source': 'Código abierto',
+        'Open source on GitHub': 'Código abierto en GitHub',
+        "Open-source link-in-bio page you host yourself, with visitor analytics that don't spy on anyone.":
+            'Página link-in-bio de código abierto que alojas tú mismo, con estadísticas de visitas que no espían a nadie.',
+        'Per link': 'Por link',
+        'Prefilled message (optional)': 'Mensaje precargado (opcional)',
+        'Print it, add it to a business card or a story — it always points to your page.':
+            'Imprímelo, ponlo en una tarjeta o en una historia — siempre apunta a tu página.',
+        'QR code that opens your page': 'Código QR que abre tu página',
+        'Remove :platform': 'Quitar :platform',
+        'Remove avatar': 'Quitar avatar',
+        'Remove banner': 'Quitar banner',
+        'Save': 'Guardar',
+        'Schedule links by date, highlight what\'s live right now, and tease launches with a countdown.':
+            'Programa links por fecha, destaca lo que está en vivo ahora y anticipa lanzamientos con una cuenta regresiva.',
+        'Scheduled': 'Programado',
+        'See a live example': 'Ver un ejemplo en vivo',
+        "Server-rendered pages with no trackers and no external requests. Built mobile-first, because that's where your visitors are.":
+            'Páginas renderizadas en el servidor, sin rastreadores ni peticiones externas. Diseñado primero para el celular, porque ahí están tus visitas.',
+        'Share your page': 'Comparte tu página',
+        'Show': 'Mostrar',
+        'Show countdown before it starts': 'Mostrar cuenta regresiva antes de que empiece',
+        'Shown as icons at the bottom of your page. Prefer a big button? Add it as a regular link instead.':
+            'Se muestran como iconos al pie de tu página. ¿Prefieres un botón grande? Agrégalo como link normal.',
+        'Social icon added.': 'Icono social agregado.',
+        'Social icon removed.': 'Icono social quitado.',
+        'Social icons': 'Iconos sociales',
+        'Social profiles': 'Perfiles sociales',
+        'Solid color': 'Color sólido',
+        'Starts at (optional)': 'Empieza el (opcional)',
+        'The :attribute ":input" is reserved.': 'El :attribute ":input" está reservado.',
+        'The :attribute may only contain lowercase letters, numbers, hyphens and underscores.':
+            'El campo :attribute solo puede contener minúsculas, números, guiones y guiones bajos.',
+        'The :attribute must be a valid URL.': 'El campo :attribute debe ser una URL válida.',
+        'The :attribute must start with http://, https://, mailto: or tel:.':
+            'El campo :attribute debe empezar con http://, https://, mailto: o tel:.',
+        'This will be your public page URL. Lowercase letters, numbers, hyphens and underscores.':
+            'Esta será la URL pública de tu página. Minúsculas, números, guiones y guiones bajos.',
+        'Title': 'Título',
+        'To': 'Hasta',
+        'Top referrers': 'Principales referentes',
+        'Total clicks': 'Clics totales',
+        'Unique': 'Únicos',
+        'Unique visitors': 'Visitantes únicos',
+        'Use the international format, e.g. +5491122334455.': 'Usa el formato internacional, p. ej. +5491122334455.',
+        'Use this link': 'Usar este link',
+        'Use your handle without the @, e.g. alvarocdev.': 'Usa tu usuario sin el @, p. ej. alvarocdev.',
+        'Used for your avatar ring and highlighted links.': 'Se usa en el anillo de tu avatar y en los links destacados.',
+        'Username': 'Nombre de usuario',
+        'View my page': 'Ver mi página',
+        'You already added this platform.': 'Ya agregaste esta plataforma.',
+        'Your data.': 'Tus datos.',
+        'Your domain.': 'Tu dominio.',
+        'Your handle, email or URL': 'Tu usuario, email o URL',
+        'Your links.': 'Tus links.',
+        'Your links. Your domain. Your data.': 'Tus links. Tu dominio. Tus datos.',
+        'Your look': 'Tu estilo',
+        'Your page lives on your own domain and server. No platform can paywall it, break your URL or shut it down.':
+            'Tu página vive en tu propio dominio y servidor. Ninguna plataforma puede cobrarte por ella, romper tu URL ni cerrarla.',
+        'starts in': 'empieza en',
+        'Language': 'Idioma',
+    },
+    pt_BR: {
+        ':count click|:count clicks': ':count clique|:count cliques',
+        ':days days': ':days dias',
+        'Accent palette': 'Paleta de destaque',
+        'Add': 'Adicionar',
+        'Add link': 'Adicionar link',
+        "An open-source link-in-bio page you host yourself — with visitor analytics that don't spy on anyone.":
+            'Uma página link-in-bio de código aberto que você mesmo hospeda — com estatísticas de visitantes que não espionam ninguém.',
+        'Analytics': 'Estatísticas',
+        'Analytics without spying': 'Estatísticas sem espionar',
+        'Avatar, banner, color palettes, solid or gradient backgrounds — with automatic dark mode and readable text guaranteed.':
+            'Avatar, banner, paletas de cores, fundos sólidos ou degradês — com modo escuro automático e texto legível garantido.',
+        'Background': 'Fundo',
+        'Bio': 'Bio',
+        'Build a WhatsApp link': 'Criar um link de WhatsApp',
+        'Click stats with zero cookies and zero personal data stored. No consent banner needed — private by design.':
+            'Estatísticas de cliques sem cookies e sem armazenar dados pessoais. Sem banner de consentimento — privado por padrão.',
+        'Clicks': 'Cliques',
+        'Clicks per day': 'Cliques por dia',
+        'Clicks per day, last :days days': 'Cliques por dia, últimos :days dias',
+        'Copied!': 'Copiado!',
+        'Copy URL': 'Copiar URL',
+        'Create your page': 'Crie sua página',
+        "Create your page — it's free": 'Crie sua página — é grátis',
+        'Create yours': 'Crie a sua',
+        'Dashboard': 'Painel',
+        'Default': 'Padrão',
+        'Delete': 'Excluir',
+        'Delete this link?': 'Excluir este link?',
+        'Design': 'Design',
+        'Design updated.': 'Design atualizado.',
+        'Download QR (SVG)': 'Baixar QR (SVG)',
+        'Drag to reorder': 'Arraste para reordenar',
+        'Edit': 'Editar',
+        'Ends at (optional)': 'Termina em (opcional)',
+        'Expired': 'Expirado',
+        'Fast and lightweight': 'Rápido e leve',
+        'Features': 'Recursos',
+        'Gradient': 'Degradê',
+        'Hidden': 'Oculto',
+        'Hide': 'Ocultar',
+        'Highlight this link': 'Destacar este link',
+        'Highlighted': 'Destacado',
+        'Link': 'Link',
+        'Link created.': 'Link criado.',
+        'Link deleted.': 'Link excluído.',
+        'Link updated.': 'Link atualizado.',
+        'Links': 'Links',
+        'Links with superpowers': 'Links com superpoderes',
+        'Log Out': 'Sair',
+        'Log in': 'Entrar',
+        'MIT licensed, self-hostable on cheap shared hosting (PHP + MySQL). Read the code, run your own, contribute.':
+            'Licença MIT, auto-hospedável em hospedagem compartilhada barata (PHP + MySQL). Leia o código, rode o seu, contribua.',
+        'No external referrers yet — clicks from your page or shared links without a referrer count as direct.':
+            'Ainda não há referências externas — cliques da sua página ou de links compartilhados sem referência contam como diretos.',
+        'No links yet.': 'Ainda não há links.',
+        'No links yet. Add your first one!': 'Ainda não há links. Adicione o primeiro!',
+        'No vendor lock-in': 'Sem dependência de plataformas',
+        'Nothing here yet.': 'Ainda não há nada aqui.',
+        'Open source': 'Código aberto',
+        'Open source on GitHub': 'Código aberto no GitHub',
+        "Open-source link-in-bio page you host yourself, with visitor analytics that don't spy on anyone.":
+            'Página link-in-bio de código aberto que você mesmo hospeda, com estatísticas de visitantes que não espionam ninguém.',
+        'Per link': 'Por link',
+        'Prefilled message (optional)': 'Mensagem pré-preenchida (opcional)',
+        'Print it, add it to a business card or a story — it always points to your page.':
+            'Imprima, coloque em um cartão de visita ou em um story — sempre aponta para a sua página.',
+        'QR code that opens your page': 'Código QR que abre a sua página',
+        'Remove :platform': 'Remover :platform',
+        'Remove avatar': 'Remover avatar',
+        'Remove banner': 'Remover banner',
+        'Save': 'Salvar',
+        'Schedule links by date, highlight what\'s live right now, and tease launches with a countdown.':
+            'Agende links por data, destaque o que está ao vivo agora e antecipe lançamentos com uma contagem regressiva.',
+        'Scheduled': 'Agendado',
+        'See a live example': 'Veja um exemplo ao vivo',
+        "Server-rendered pages with no trackers and no external requests. Built mobile-first, because that's where your visitors are.":
+            'Páginas renderizadas no servidor, sem rastreadores nem requisições externas. Feito primeiro para o celular, porque é lá que estão suas visitas.',
+        'Share your page': 'Compartilhe sua página',
+        'Show': 'Mostrar',
+        'Show countdown before it starts': 'Mostrar contagem regressiva antes de começar',
+        'Shown as icons at the bottom of your page. Prefer a big button? Add it as a regular link instead.':
+            'Aparecem como ícones no rodapé da sua página. Prefere um botão grande? Adicione como link normal.',
+        'Social icon added.': 'Ícone social adicionado.',
+        'Social icon removed.': 'Ícone social removido.',
+        'Social icons': 'Ícones sociais',
+        'Social profiles': 'Perfis sociais',
+        'Solid color': 'Cor sólida',
+        'Starts at (optional)': 'Começa em (opcional)',
+        'The :attribute ":input" is reserved.': 'O :attribute ":input" está reservado.',
+        'The :attribute may only contain lowercase letters, numbers, hyphens and underscores.':
+            'O campo :attribute só pode conter minúsculas, números, hifens e sublinhados.',
+        'The :attribute must be a valid URL.': 'O campo :attribute deve ser uma URL válida.',
+        'The :attribute must start with http://, https://, mailto: or tel:.':
+            'O campo :attribute deve começar com http://, https://, mailto: ou tel:.',
+        'This will be your public page URL. Lowercase letters, numbers, hyphens and underscores.':
+            'Esta será a URL pública da sua página. Minúsculas, números, hifens e sublinhados.',
+        'Title': 'Título',
+        'To': 'Até',
+        'Top referrers': 'Principais referências',
+        'Total clicks': 'Total de cliques',
+        'Unique': 'Únicos',
+        'Unique visitors': 'Visitantes únicos',
+        'Use the international format, e.g. +5491122334455.': 'Use o formato internacional, ex.: +5491122334455.',
+        'Use this link': 'Usar este link',
+        'Use your handle without the @, e.g. alvarocdev.': 'Use seu usuário sem o @, ex.: alvarocdev.',
+        'Used for your avatar ring and highlighted links.': 'Usado no anel do seu avatar e nos links destacados.',
+        'Username': 'Nome de usuário',
+        'View my page': 'Ver minha página',
+        'You already added this platform.': 'Você já adicionou esta plataforma.',
+        'Your data.': 'Seus dados.',
+        'Your domain.': 'Seu domínio.',
+        'Your handle, email or URL': 'Seu usuário, e-mail ou URL',
+        'Your links.': 'Seus links.',
+        'Your links. Your domain. Your data.': 'Seus links. Seu domínio. Seus dados.',
+        'Your look': 'Seu estilo',
+        'Your page lives on your own domain and server. No platform can paywall it, break your URL or shut it down.':
+            'Sua página vive no seu próprio domínio e servidor. Nenhuma plataforma pode cobrar por ela, quebrar sua URL nem encerrá-la.',
+        'starts in': 'começa em',
+        'Language': 'Idioma',
+    },
+};
+
+const phpExport = (value, indent = 1) => {
+    const pad = '    '.repeat(indent);
+    if (typeof value !== 'object' || value === null) {
+        return `'${String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+    }
+    const rows = Object.entries(value)
+        .map(([k, v]) => `${pad}'${k.replace(/'/g, "\\'")}' => ${phpExport(v, indent + 1)},`)
+        .join('\n');
+    return `[\n${rows}\n${'    '.repeat(indent - 1)}]`;
+};
+
+// Expand dot-keys ("between.numeric") into nested objects.
+const nest = (flat) => {
+    const out = {};
+    for (const [key, value] of Object.entries(flat)) {
+        const parts = key.split('.');
+        let node = out;
+        while (parts.length > 1) node = node[parts.shift()] ??= {};
+        node[parts[0]] = value;
+    }
+    return out;
+};
+
+for (const locale of ['es', 'pt_BR']) {
+    const base = `vendor/laravel-lang/lang/locales/${locale}`;
+    const php = JSON.parse(readFileSync(`${base}/php.json`, 'utf8'));
+    const json = JSON.parse(readFileSync(`${base}/json.json`, 'utf8'));
+
+    const groups = { auth: {}, passwords: {}, pagination: {}, validation: {} };
+    for (const [key, value] of Object.entries(php)) {
+        if (AUTH_KEYS.includes(key)) groups.auth[key] = value;
+        else if (PASSWORD_KEYS.includes(key)) groups.passwords[key] = value;
+        else if (PAGINATION_KEYS.includes(key)) groups.pagination[key] = value;
+        else groups.validation[key] = value;
+    }
+
+    mkdirSync(`lang/${locale}`, { recursive: true });
+    for (const [group, entries] of Object.entries(groups)) {
+        writeFileSync(`lang/${locale}/${group}.php`, `<?php\n\nreturn ${phpExport(nest(entries))};\n`);
+    }
+
+    const merged = { ...json, ...nexo[locale] };
+    writeFileSync(`lang/${locale}.json`, JSON.stringify(merged, null, 4) + '\n');
+    console.log(`✓ ${locale}: ${Object.keys(merged).length} JSON strings, validation/auth/passwords/pagination PHP files`);
+}

@@ -16,7 +16,7 @@ class LinkUrl implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! is_string($value)) {
-            $fail('The :attribute must be a valid URL.');
+            $fail('The :attribute must be a valid URL.')->translate();
 
             return;
         }
@@ -24,13 +24,13 @@ class LinkUrl implements ValidationRule
         $scheme = strtolower((string) parse_url($value, PHP_URL_SCHEME));
 
         if (! in_array($scheme, self::ALLOWED_SCHEMES, true)) {
-            $fail('The :attribute must start with http://, https://, mailto: or tel:.');
+            $fail('The :attribute must start with http://, https://, mailto: or tel:.')->translate();
 
             return;
         }
 
         if (in_array($scheme, ['http', 'https'], true) && filter_var($value, FILTER_VALIDATE_URL) === false) {
-            $fail('The :attribute must be a valid URL.');
+            $fail('The :attribute must be a valid URL.')->translate();
         }
     }
 }

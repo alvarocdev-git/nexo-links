@@ -16,13 +16,13 @@ class Username implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! is_string($value) || preg_match(self::FORMAT, $value) !== 1) {
-            $fail('The :attribute may only contain lowercase letters, numbers, hyphens and underscores.');
+            $fail('The :attribute may only contain lowercase letters, numbers, hyphens and underscores.')->translate();
 
             return;
         }
 
         if (in_array($value, config('nexo.reserved_usernames'), true)) {
-            $fail('The :attribute ":input" is reserved.');
+            $fail('The :attribute ":input" is reserved.')->translate();
         }
     }
 }

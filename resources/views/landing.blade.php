@@ -23,6 +23,7 @@
         <nav class="flex items-center justify-between py-6">
             <span class="text-lg font-bold tracking-tight">{{ config('app.name') }}</span>
             <div class="flex items-center gap-4 text-sm">
+                <x-language-switcher />
                 @auth
                     <a href="{{ route('dashboard') }}" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">{{ __('Dashboard') }} →</a>
                 @else

@@ -143,6 +143,8 @@
             <a href="{{ route('home') }}" class="transition hover:opacity-70">
                 {{ __('Create yours') }}
             </a>
+            <span aria-hidden="true">·</span>
+            <x-language-switcher class="gap-1.5" />
         </footer>
     </main>
 
