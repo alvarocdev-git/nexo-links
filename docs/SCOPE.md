@@ -27,6 +27,11 @@ What Nexo solves that mainstream alternatives don't:
 - Public profile page at `/{username}`: responsive, SEO + Open Graph meta tags
 - Cookieless click analytics: per-link and per-day counts, referrers
 - Scheduled links, highlighted link, countdowns
+- Social icons footer: predefined platforms (Instagram, X, TikTok, YouTube,
+  GitHub, LinkedIn, etc.) shown as icons; the owner decides whether a social
+  profile lives in the footer or as a regular link button
+- Contact link types: phone (`tel:`), email (`mailto:`) and a WhatsApp link
+  builder (phone + prefilled message → `wa.me` URL)
 - Profile customization: avatar, bio, color themes
 - Production deploy on shared hosting (Hostinger, PHP + MySQL)
 

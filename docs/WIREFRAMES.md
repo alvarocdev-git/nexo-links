@@ -25,6 +25,8 @@ same single-column layout centered with a max width.
 │  │ Event — starts in 02:14│  │   ← countdown link
 │  └────────────────────────┘  │
 │                              │
+│      ◉  ◉  ◉  ◉  ◉          │   ← social icons footer (IG, X, GitHub,
+│                              │     WhatsApp, email… owner picks which)
 │        made with Nexo        │   ← footer, links to the repo
 └──────────────────────────────┘
 ```
