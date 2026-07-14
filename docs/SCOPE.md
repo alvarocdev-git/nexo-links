@@ -36,7 +36,19 @@ What Nexo solves that mainstream alternatives don't:
 - Configurable footer attribution per instance (env): defaults to
   "made with Nexo" → repo; the reference deploy shows
   "powered by alvarocdev.com"
+- Marketing landing page at `/`: product explanation, login/register CTAs
+  and a live example page
+- Auto-generated QR code (SVG, server-side, no third-party services)
+  downloadable from the dashboard
 - Production deploy on shared hosting (Hostinger, PHP + MySQL)
+
+## Design principles
+
+- **Mobile-first**: public pages and dashboard are designed for phone
+  viewports first — most visitors come from social app in-app browsers
+- Distinctive but restrained aesthetics: strong typography, subtle
+  micro-animations, first-class dark mode — not another Linktree clone
+- Cross-browser: Chrome, Firefox, Safari (incl. iOS) and Edge
 
 ## Out of scope (for now)
 
@@ -46,6 +58,12 @@ What Nexo solves that mainstream alternatives don't:
 - Native mobile apps
 - Teams / multiple editors per page
 - Media hosting beyond the avatar
+
+## Planned after v1
+
+- Social login with Google and GitHub (Laravel Socialite); Apple Sign-In
+  deliberately skipped at first (requires a paid Apple Developer account)
+- Two-factor authentication
 
 ## Tech stack
 
