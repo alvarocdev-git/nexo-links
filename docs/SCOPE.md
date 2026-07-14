@@ -43,7 +43,7 @@ What Nexo solves that mainstream alternatives don't:
 
 | Layer      | Choice                              | Why                                               |
 | ---------- | ----------------------------------- | ------------------------------------------------- |
-| Backend    | Laravel 12 (PHP 8.4)                | Runs natively on shared hosting; batteries included |
+| Backend    | Laravel 13 (PHP 8.4)                | Runs natively on shared hosting; batteries included |
 | Database   | MySQL 8                             | Native on Hostinger shared plans                  |
 | Frontend   | Blade + Alpine.js + Tailwind CSS    | Server-rendered, minimal JS, fast public pages    |
 | Dev env    | Docker via Laravel Sail             | Reproducible local environment                    |
