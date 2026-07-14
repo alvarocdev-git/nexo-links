@@ -1,15 +1,15 @@
-# Nexo
+# Nexo Links
 
 **Your links. Your domain. Your data.**
 
-Nexo is an open-source, self-hosted link-in-bio platform — a Linktree
+Nexo Links is an open-source, self-hosted link-in-bio platform — a Linktree
 alternative you run on your own domain and infrastructure, designed to work
 even on cheap shared hosting (PHP + MySQL).
 
 [![CI](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Why Nexo?
+## Why Nexo Links?
 
 - **No vendor lock-in** — your page lives on *your* domain. No platform can
   take it away, paywall it, or shut it down.
@@ -63,7 +63,7 @@ Open [http://localhost](http://localhost) — demo account: `demo@nexo.test` /
 
 ## Self-hosting
 
-Nexo runs on any host with PHP 8.3+ and MySQL — including shared hosting.
+Nexo Links runs on any host with PHP 8.3+ and MySQL — including shared hosting.
 See the step-by-step guide: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
 
 ### Configuration
@@ -71,7 +71,7 @@ See the step-by-step guide: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
 | Env var | Purpose | Default |
 | --- | --- | --- |
 | `APP_TIMEZONE` | Timezone for link scheduling | `UTC` |
-| `NEXO_ATTRIBUTION_LABEL` | Public page footer text | `made with Nexo` |
+| `NEXO_ATTRIBUTION_LABEL` | Public page footer text | `made with Nexo Links` |
 | `NEXO_ATTRIBUTION_URL` | Footer link target | this repo |
 | `NEXO_EXAMPLE_USERNAME` | Page linked as the landing's live example | `demo` |
 

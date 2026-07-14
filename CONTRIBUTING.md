@@ -1,4 +1,4 @@
-# Contributing to Nexo
+# Contributing to Nexo Links
 
 Thanks for your interest! Contributions of every size are welcome — bug
 reports, translations, docs and code.
@@ -42,7 +42,7 @@ New behavior needs tests. Run `composer lint` to auto-fix style.
 
 ## Translations
 
-UI strings live in `scripts/generate-translations.mjs` (Nexo's own strings)
+UI strings live in `scripts/generate-translations.mjs` (Nexo Links's own strings)
 merged with [laravel-lang](https://github.com/Laravel-Lang/lang) (framework
 strings). To fix or add a translation, edit the maps in that script and run:
 

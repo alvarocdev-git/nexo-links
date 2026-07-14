@@ -1,6 +1,6 @@
-# Nexo — Project Scope
+# Nexo Links — Project Scope
 
-Nexo is an open-source, self-hosted link-in-bio platform (a Linktree alternative).
+Nexo Links is an open-source, self-hosted link-in-bio platform (a Linktree alternative).
 Users create a public page at `/{username}` with their links, fully under their own
 domain and infrastructure.
 
@@ -8,9 +8,9 @@ domain and infrastructure.
 
 > **Your links, your domain, and visitor analytics without spying on anyone.**
 
-What Nexo solves that mainstream alternatives don't:
+What Nexo Links solves that mainstream alternatives don't:
 
-1. **No vendor lock-in** — self-hosted on your own domain (e.g. `link.alvarocdev.com`).
+1. **No vendor lock-in** — self-hosted on your own domain (e.g. `nexolinks.alvarocdev.com`).
    Your URL survives any platform shutting down or changing its pricing.
 2. **Privacy-first analytics** — click stats without cookies and without storing
    personal data. No consent banner required (GDPR-friendly by design).
@@ -35,7 +35,7 @@ What Nexo solves that mainstream alternatives don't:
 - Profile customization: avatar, bio, banner image, page background
   (solid color or gradient) and color palette presets
 - Configurable footer attribution per instance (env): defaults to
-  "made with Nexo" → repo; the reference deploy shows
+  "made with Nexo Links" → repo; the reference deploy shows
   "powered by alvarocdev.com"
 - Marketing landing page at `/`: product explanation, login/register CTAs
   and a live example page
@@ -44,7 +44,7 @@ What Nexo solves that mainstream alternatives don't:
 - Multilingual interface: Spanish, English and Portuguese, with a visible
   language switcher that updates everything instantly (public pages pick
   the visitor's browser language by default)
-- Help center ("What can I do in Nexo?"): short guides for every feature —
+- Help center ("What can I do in Nexo Links?"): short guides for every feature —
   create an account, add links, schedule, read analytics, share the QR —
   translatable and linked from the landing and the dashboard
 - Report system: visitors can report a page or a specific link (broken,

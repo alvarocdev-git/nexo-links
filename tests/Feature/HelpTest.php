@@ -5,7 +5,7 @@ use App\Models\Page;
 test('the help page renders every topic', function () {
     $this->get('/help')
         ->assertOk()
-        ->assertSee('What can I do in Nexo?')
+        ->assertSee('What can I do in Nexo Links?')
         ->assertSeeInOrder([
             'Create your account',
             'Add and organize your links',
@@ -19,8 +19,8 @@ test('the help page renders every topic', function () {
 });
 
 test('the help page is translated', function () {
-    $this->get('/help?lang=es')->assertOk()->assertSee('¿Qué puedo hacer en Nexo?');
-    $this->get('/help?lang=pt_BR')->assertOk()->assertSee('O que posso fazer no Nexo?');
+    $this->get('/help?lang=es')->assertOk()->assertSee('¿Qué puedo hacer en Nexo Links?');
+    $this->get('/help?lang=pt_BR')->assertOk()->assertSee('O que posso fazer no Nexo Links?');
 });
 
 test('the landing links to the help page', function () {

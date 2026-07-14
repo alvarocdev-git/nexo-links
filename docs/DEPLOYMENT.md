@@ -1,4 +1,4 @@
-# Deploying Nexo to shared hosting (Hostinger)
+# Deploying Nexo Links to shared hosting (Hostinger)
 
 This guide targets Hostinger shared/Premium hosting, but applies to any host
 with **PHP 8.3+, MySQL and SSH access**. No Node.js is needed on the server —
@@ -8,7 +8,7 @@ assets are built locally or by CI.
 
 ### Subdomain and document root
 
-1. hPanel → **Domains → Subdomains** → create `link` (→ `link.alvarocdev.com`).
+1. hPanel → **Domains → Subdomains** → create `nexolinks` (→ `nexolinks.alvarocdev.com`).
 2. The app must serve from its `public/` folder. Point the subdomain's
    document root at `<app>/public`, e.g. app in
    `~/domains/alvarocdev.com/nexo` → document root
@@ -16,8 +16,8 @@ assets are built locally or by CI.
    If hPanel doesn't let you pick a folder outside the subdomain root, create
    the subdomain first and replace its folder with a symlink:
    ```bash
-   rm -rf ~/domains/alvarocdev.com/public_html/link
-   ln -s ~/domains/alvarocdev.com/nexo/public ~/domains/alvarocdev.com/public_html/link
+   rm -rf ~/domains/alvarocdev.com/public_html/nexolinks
+   ln -s ~/domains/alvarocdev.com/nexo/public ~/domains/alvarocdev.com/public_html/nexolinks
    ```
 3. hPanel → **Security → SSL** → issue the free certificate for the subdomain.
 4. hPanel → **Advanced → PHP Configuration** → select **PHP 8.3+**.
@@ -50,10 +50,10 @@ php artisan config:cache && php artisan route:cache && php artisan view:cache
 ### Production `.env` essentials
 
 ```dotenv
-APP_NAME=Nexo
+APP_NAME="Nexo Links"
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://link.alvarocdev.com
+APP_URL=https://nexolinks.alvarocdev.com
 APP_TIMEZONE=America/Argentina/Buenos_Aires
 
 DB_CONNECTION=mysql
@@ -125,7 +125,7 @@ secrets first (**Settings → Secrets and variables → Actions**):
 
 ## 3. Post-deploy checklist
 
-- `https://link.alvarocdev.com/up` returns 200
+- `https://nexolinks.alvarocdev.com/up` returns 200
 - Landing, `/help` and the demo page render with styles
 - Register a test account and verify the email arrives
 - Set `NEXO_EXAMPLE_USERNAME` to your real username once your page exists

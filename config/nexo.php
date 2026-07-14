@@ -13,7 +13,7 @@ return [
     */
 
     'attribution' => [
-        'label' => env('NEXO_ATTRIBUTION_LABEL', 'made with Nexo'),
+        'label' => env('NEXO_ATTRIBUTION_LABEL', 'made with Nexo Links'),
         'url' => env('NEXO_ATTRIBUTION_URL', 'https://github.com/alvarocdev-git/nexo-links'),
     ],
 

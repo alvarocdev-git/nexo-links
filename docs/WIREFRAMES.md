@@ -1,4 +1,4 @@
-# Nexo — Wireframes
+# Nexo Links — Wireframes
 
 Low-fidelity wireframes for the three core screens. Mobile-first; desktop keeps the
 same single-column layout centered with a max width.
@@ -27,7 +27,7 @@ same single-column layout centered with a max width.
 │                              │
 │      ◉  ◉  ◉  ◉  ◉          │   ← social icons footer (IG, X, GitHub,
 │                              │     WhatsApp, email… owner picks which)
-│        made with Nexo        │   ← footer, links to the repo
+│        made with Nexo Links      │   ← footer, links to the repo
 └──────────────────────────────┘
 ```
 
@@ -35,7 +35,7 @@ same single-column layout centered with a max width.
 
 ```
 ┌──────────────────────────────────────────────┐
-│ Nexo   Links | Analytics | Design | Settings │  ← top nav
+│ NexoLinks mark  | Analytics | Design | Settings │  ← top nav
 ├──────────────────────────────────────────────┤
 │  [ + Add link ]           View my page ↗     │
 │                                              │
@@ -58,7 +58,7 @@ same single-column layout centered with a max width.
 
 ```
 ┌──────────────────────────────┐
-│            Nexo              │
+│         Nexo Links           │
 │     Create your page         │
 │                              │
 │  Username                    │

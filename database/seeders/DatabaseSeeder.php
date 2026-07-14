@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         $page = Page::factory()->for($user)->create([
             'username' => 'demo',
-            'bio' => 'Building Nexo — open-source link-in-bio.',
+            'bio' => 'Building Nexo Links — open-source link-in-bio.',
         ]);
 
         $links = collect([
