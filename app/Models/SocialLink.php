@@ -21,6 +21,11 @@ class SocialLink extends Model
     use HasFactory;
 
     /**
+     * @var list<string>
+     */
+    protected $touches = ['page'];
+
+    /**
      * @return BelongsTo<Page, $this>
      */
     public function page(): BelongsTo

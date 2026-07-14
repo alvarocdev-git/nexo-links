@@ -95,6 +95,9 @@ class LinkController extends Controller
             }
         });
 
+        // Query-builder updates skip model events, so bust the cache by hand.
+        $page->touch();
+
         return response()->noContent();
     }
 

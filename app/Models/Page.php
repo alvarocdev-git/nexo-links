@@ -34,6 +34,21 @@ class Page extends Model
     /** @use HasFactory<PageFactory> */
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        static::saved(fn (Page $page) => $page->flushCache());
+    }
+
+    /**
+     * Forget the cached public page in every locale.
+     */
+    public function flushCache(): void
+    {
+        foreach (array_keys(config('nexo.locales')) as $locale) {
+            cache()->forget("page:{$this->id}:{$locale}");
+        }
+    }
+
     /**
      * @return BelongsTo<User, $this>
      */

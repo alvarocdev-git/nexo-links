@@ -36,6 +36,11 @@ class Link extends Model
     use HasFactory;
 
     /**
+     * @var list<string>
+     */
+    protected $touches = ['page'];
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array

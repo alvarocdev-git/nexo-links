@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SocialLinkController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,28 @@ Route::get('/', function () {
 })->name('home');
 
 Route::view('/help', 'help')->name('help');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+
+Route::get('/robots.txt', function () {
+    $lines = [
+        'User-agent: *',
+        'Disallow: /l/',
+        'Disallow: /report/',
+        'Disallow: /dashboard',
+        'Disallow: /analytics',
+        'Disallow: /design',
+        'Disallow: /reports',
+        'Disallow: /qr',
+        'Disallow: /profile',
+        'Disallow: /login',
+        'Disallow: /register',
+        '',
+        'Sitemap: '.route('sitemap'),
+    ];
+
+    return response(implode("\n", $lines), 200, ['Content-Type' => 'text/plain']);
+})->name('robots');
 
 Route::get('/report/{page:username}', [ReportController::class, 'create'])->name('report.create');
 Route::post('/report/{page:username}', [ReportController::class, 'store'])
