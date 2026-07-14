@@ -130,15 +130,18 @@
             </nav>
         @endif
 
-        <footer class="mt-auto pt-14 text-center">
-            <a href="{{ config('nexo.attribution.url') }}" rel="noopener"
-               @class([
-                   'text-sm transition',
-                   'text-neutral-400 hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400' => $customBg === null,
-                   'text-white/60 hover:text-white/90' => $lightInk,
-                   'text-neutral-500 hover:text-neutral-700' => $customBg !== null && ! $lightInk,
-               ])>
+        <footer @class([
+            'mt-auto flex items-center justify-center gap-3 pt-14 text-center text-sm',
+            'text-neutral-400 dark:text-neutral-600' => $customBg === null,
+            'text-white/60' => $lightInk,
+            'text-neutral-500' => $customBg !== null && ! $lightInk,
+        ])>
+            <a href="{{ config('nexo.attribution.url') }}" rel="noopener" class="transition hover:opacity-70">
                 {{ config('nexo.attribution.label') }}
+            </a>
+            <span aria-hidden="true">·</span>
+            <a href="{{ route('home') }}" class="transition hover:opacity-70">
+                {{ __('Create yours') }}
             </a>
         </footer>
     </main>
