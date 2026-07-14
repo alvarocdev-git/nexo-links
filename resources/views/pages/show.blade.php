@@ -113,6 +113,23 @@
             <p class="mt-10 text-center opacity-60">{{ __('Nothing here yet.') }}</p>
         @endif
 
+        @if ($page->socialLinks->isNotEmpty())
+            <nav class="mt-8 flex flex-wrap justify-center gap-3" aria-label="{{ __('Social profiles') }}">
+                @foreach ($page->socialLinks as $social)
+                    <a href="{{ $social->url() }}" rel="noopener" target="_blank"
+                       aria-label="{{ $social->label() }}" title="{{ $social->label() }}"
+                       @class([
+                           'flex h-11 w-11 items-center justify-center rounded-full transition hover:-translate-y-0.5 motion-reduce:transition-none',
+                           'bg-white text-neutral-700 shadow-sm hover:text-neutral-900 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-50' => $customBg === null,
+                           'bg-white/15 text-white hover:bg-white/25' => $lightInk,
+                           'bg-white text-neutral-700 shadow-sm hover:text-neutral-900' => $customBg !== null && ! $lightInk,
+                       ])>
+                        <x-dynamic-component :component="'icons.'.$social->platform" class="h-5 w-5" />
+                    </a>
+                @endforeach
+            </nav>
+        @endif
+
         <footer class="mt-auto pt-14 text-center">
             <a href="{{ config('nexo.attribution.url') }}" rel="noopener"
                @class([

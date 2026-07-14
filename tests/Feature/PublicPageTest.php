@@ -2,6 +2,7 @@
 
 use App\Models\Link;
 use App\Models\Page;
+use App\Models\SocialLink;
 
 test('a public page renders username, bio and visible links', function () {
     $page = Page::factory()->create(['username' => 'ada', 'bio' => 'Math & code.']);
@@ -156,4 +157,26 @@ test('avatar and banner images are rendered when set', function () {
         ->assertOk()
         ->assertSee('/storage/avatars/me.png')
         ->assertSee('/storage/banners/hero.png');
+});
+
+test('social icons render in the footer with the right urls', function () {
+    $page = Page::factory()->create();
+    SocialLink::factory()->create(['page_id' => $page->id, 'platform' => 'instagram', 'value' => 'ada.dev']);
+    SocialLink::factory()->create(['page_id' => $page->id, 'platform' => 'whatsapp', 'value' => '+5491122334455', 'position' => 1]);
+    SocialLink::factory()->create(['page_id' => $page->id, 'platform' => 'email', 'value' => 'hi@example.com', 'position' => 2]);
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertSee('https://instagram.com/ada.dev')
+        ->assertSee('https://wa.me/5491122334455')
+        ->assertSee('mailto:hi@example.com')
+        ->assertSee('aria-label="Instagram"', false);
+});
+
+test('the social footer is omitted when there are no social links', function () {
+    $page = Page::factory()->create();
+
+    $this->get('/'.$page->username)
+        ->assertOk()
+        ->assertDontSee('Social profiles');
 });

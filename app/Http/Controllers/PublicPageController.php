@@ -12,7 +12,7 @@ class PublicPageController extends Controller
     {
         $page = Page::query()
             ->where('username', $username)
-            ->with('links')
+            ->with(['links', 'socialLinks'])
             ->firstOrFail();
 
         return view('pages.show', [

@@ -51,6 +51,14 @@ class Page extends Model
     }
 
     /**
+     * @return HasMany<SocialLink, $this>
+     */
+    public function socialLinks(): HasMany
+    {
+        return $this->hasMany(SocialLink::class)->orderBy('position');
+    }
+
+    /**
      * Inline CSS for a custom background, or null to use the default one.
      */
     public function backgroundCss(): ?string

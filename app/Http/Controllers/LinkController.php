@@ -23,6 +23,8 @@ class LinkController extends Controller
         return view('dashboard', [
             'page' => $page,
             'links' => $page->links()->withCount('clicks')->get(),
+            'socialLinks' => $page->socialLinks,
+            'socialPlatforms' => config('nexo.social_platforms'),
         ]);
     }
 

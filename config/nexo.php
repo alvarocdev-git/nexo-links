@@ -19,6 +19,31 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Social Platforms
+    |--------------------------------------------------------------------------
+    |
+    | Platforms available for the icons footer. "type" drives validation of
+    | the stored value: handle, email or phone (E.164 with leading +).
+    |
+    */
+
+    'social_platforms' => [
+        'instagram' => ['label' => 'Instagram', 'url' => 'https://instagram.com/{value}', 'type' => 'handle'],
+        'x' => ['label' => 'X', 'url' => 'https://x.com/{value}', 'type' => 'handle'],
+        'tiktok' => ['label' => 'TikTok', 'url' => 'https://tiktok.com/@{value}', 'type' => 'handle'],
+        'youtube' => ['label' => 'YouTube', 'url' => 'https://youtube.com/@{value}', 'type' => 'handle'],
+        'github' => ['label' => 'GitHub', 'url' => 'https://github.com/{value}', 'type' => 'handle'],
+        'twitch' => ['label' => 'Twitch', 'url' => 'https://twitch.tv/{value}', 'type' => 'handle'],
+        'facebook' => ['label' => 'Facebook', 'url' => 'https://facebook.com/{value}', 'type' => 'handle'],
+        'telegram' => ['label' => 'Telegram', 'url' => 'https://t.me/{value}', 'type' => 'handle'],
+        'whatsapp' => ['label' => 'WhatsApp', 'url' => 'https://wa.me/{value}', 'type' => 'phone'],
+        'email' => ['label' => 'Email', 'url' => 'mailto:{value}', 'type' => 'email'],
+        'phone' => ['label' => 'Phone', 'url' => 'tel:{value}', 'type' => 'phone'],
+        'website' => ['label' => 'Website', 'url' => '{value}', 'type' => 'url'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Theme Presets
     |--------------------------------------------------------------------------
     |

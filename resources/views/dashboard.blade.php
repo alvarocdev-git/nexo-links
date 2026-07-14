@@ -19,6 +19,10 @@
                 <p class="text-sm text-green-600">{{ __('Link updated.') }}</p>
             @elseif (session('status') === 'link-deleted')
                 <p class="text-sm text-green-600">{{ __('Link deleted.') }}</p>
+            @elseif (session('status') === 'social-created')
+                <p class="text-sm text-green-600">{{ __('Social icon added.') }}</p>
+            @elseif (session('status') === 'social-deleted')
+                <p class="text-sm text-green-600">{{ __('Social icon removed.') }}</p>
             @endif
 
             <!-- Add link -->
@@ -34,10 +38,28 @@
                         <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title')" required maxlength="120" />
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     </div>
-                    <div>
+                    <div x-data="{ wa: false, phone: '', message: '' }">
                         <x-input-label for="url" :value="__('URL')" />
                         <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url')" required maxlength="2048" placeholder="https://…" />
                         <x-input-error :messages="$errors->get('url')" class="mt-2" />
+
+                        <button type="button" @click="wa = ! wa" class="mt-2 text-sm text-green-700 hover:text-green-900 underline">
+                            {{ __('Build a WhatsApp link') }}
+                        </button>
+
+                        <div x-show="wa" x-cloak class="mt-2 space-y-2 rounded-md bg-green-50 p-3">
+                            <div class="grid gap-2 sm:grid-cols-2">
+                                <input type="text" x-model="phone" placeholder="{{ __('Phone, e.g. +5491122334455') }}"
+                                       class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                                <input type="text" x-model="message" placeholder="{{ __('Prefilled message (optional)') }}"
+                                       class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                            </div>
+                            <button type="button"
+                                    @click="$el.closest('form').querySelector('#url').value = 'https://wa.me/' + phone.replace(/[^0-9]/g, '') + (message ? '?text=' + encodeURIComponent(message) : ''); wa = false"
+                                    class="rounded-md bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700">
+                                {{ __('Use this link') }}
+                            </button>
+                        </div>
                     </div>
 
                     @include('links.fields')
@@ -130,6 +152,44 @@
                     @endforeach
                 </ul>
             @endif
+
+            <!-- Social icons -->
+            <div class="bg-white shadow-sm sm:rounded-lg p-6">
+                <h3 class="font-medium text-gray-900">{{ __('Social icons') }}</h3>
+                <p class="mt-1 text-sm text-gray-500">{{ __('Shown as icons at the bottom of your page. Prefer a big button? Add it as a regular link instead.') }}</p>
+
+                @if ($socialLinks->isNotEmpty())
+                    <ul class="mt-4 flex flex-wrap gap-3">
+                        @foreach ($socialLinks as $social)
+                            <li class="flex items-center gap-2 rounded-full border border-gray-200 py-1 ps-3 pe-1">
+                                <span class="text-sm text-gray-800">{{ $social->label() }}</span>
+                                <span class="text-sm text-gray-400 max-w-32 truncate">{{ $social->value }}</span>
+                                <form method="POST" action="{{ route('socials.destroy', $social) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="flex h-6 w-6 items-center justify-center rounded-full text-gray-400 hover:bg-red-50 hover:text-red-600" aria-label="{{ __('Remove :platform', ['platform' => $social->label()]) }}">×</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
+                <form method="POST" action="{{ route('socials.store') }}" class="mt-4 flex flex-wrap items-start gap-3">
+                    @csrf
+                    <select name="platform" class="rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        @foreach ($socialPlatforms as $key => $platform)
+                            <option value="{{ $key }}" @selected(old('platform') === $key)>{{ $platform['label'] }}</option>
+                        @endforeach
+                    </select>
+                    <div class="flex-1 min-w-48">
+                        <x-text-input name="value" type="text" class="block w-full text-sm" :value="old('value')"
+                                      placeholder="{{ __('Handle, email, phone or URL') }}" required />
+                        <x-input-error :messages="$errors->get('platform')" class="mt-1" />
+                        <x-input-error :messages="$errors->get('value')" class="mt-1" />
+                    </div>
+                    <x-primary-button>{{ __('Add') }}</x-primary-button>
+                </form>
+            </div>
         </div>
     </div>
 </x-app-layout>

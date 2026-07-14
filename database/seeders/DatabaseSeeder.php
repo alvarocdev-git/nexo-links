@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Click;
 use App\Models\Link;
 use App\Models\Page;
+use App\Models\SocialLink;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -61,5 +62,16 @@ class DatabaseSeeder extends Seeder
         $links->each(function (Link $link) {
             Click::factory()->count(random_int(5, 40))->create(['link_id' => $link->id]);
         });
+
+        collect([
+            ['platform' => 'github', 'value' => 'alvarocdev-git'],
+            ['platform' => 'instagram', 'value' => 'demo'],
+            ['platform' => 'email', 'value' => 'demo@nexo.test'],
+            ['platform' => 'whatsapp', 'value' => '+5491122334455'],
+        ])->each(fn (array $social, int $index) => SocialLink::factory()->create([
+            'page_id' => $page->id,
+            ...$social,
+            'position' => $index,
+        ]));
     }
 }
