@@ -54,6 +54,12 @@ What Nexo Links solves that mainstream alternatives don't:
 
 ## Design principles
 
+- **Brand identity everywhere**: everything the product ships carries the
+  Nexo Links brand — pages, icons, share images, transactional emails,
+  error pages. Written "Nexo Links" (two words); "nexolinks" only when it
+  must be a single token (subdomain, slugs). The mark lives in
+  `resources/brand/mark.svg`; regenerate assets with
+  `scripts/generate-brand-assets.mjs`
 - **Mobile-first**: public pages and dashboard are designed for phone
   viewports first — most visitors come from social app in-app browsers
 - Distinctive but restrained aesthetics: strong typography, subtle
@@ -80,6 +86,9 @@ What Nexo Links solves that mainstream alternatives don't:
 - Two-factor authentication
 - Per-user content translations: owners translate their own bio and link
   titles per language, so visitors see the page in their language
+- Branded email template: publish the mail views and add the Nexo Links
+  mark to transactional emails (verification, password reset)
+- Branded 404/error pages
 
 ## Tech stack
 
