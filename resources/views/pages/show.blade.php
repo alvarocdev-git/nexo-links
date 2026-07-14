@@ -36,13 +36,13 @@
             @foreach ($links as $link)
                 <li>
                     @if ($link->is_highlighted)
-                        <a href="{{ $link->url }}" data-highlighted rel="noopener"
+                        <a href="{{ route('link.visit', $link) }}" data-highlighted rel="noopener"
                            class="group relative block overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 to-fuchsia-600 px-5 py-4 text-center font-semibold text-white shadow-lg shadow-indigo-500/20 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-fuchsia-500/30 motion-reduce:transition-none">
                             <span class="absolute left-4 top-1/2 -mt-1 h-2 w-2 animate-pulse rounded-full bg-white/90 motion-reduce:animate-none" aria-hidden="true"></span>
                             {{ $link->title }}
                         </a>
                     @else
-                        <a href="{{ $link->url }}" rel="noopener"
+                        <a href="{{ route('link.visit', $link) }}" rel="noopener"
                            class="block rounded-2xl border border-neutral-200 bg-white px-5 py-4 text-center font-medium shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 motion-reduce:transition-none">
                             {{ $link->title }}
                         </a>

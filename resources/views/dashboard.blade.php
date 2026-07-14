@@ -73,6 +73,8 @@
                                 </div>
 
                                 <div class="flex items-center gap-2 shrink-0">
+                                    <span class="text-sm text-gray-500 tabular-nums" title="{{ __('Total clicks') }}">{{ $link->clicks_count }} ⟶</span>
+
                                     <form method="POST" action="{{ route('links.update', $link) }}">
                                         @csrf
                                         @method('PATCH')

@@ -22,7 +22,7 @@ class LinkController extends Controller
 
         return view('dashboard', [
             'page' => $page,
-            'links' => $page->links,
+            'links' => $page->links()->withCount('clicks')->get(),
         ]);
     }
 

@@ -5,7 +5,7 @@ use App\Models\Page;
 
 test('a public page renders username, bio and visible links', function () {
     $page = Page::factory()->create(['username' => 'ada', 'bio' => 'Math & code.']);
-    Link::factory()->create(['page_id' => $page->id, 'title' => 'My repo', 'url' => 'https://example.com/repo']);
+    $link = Link::factory()->create(['page_id' => $page->id, 'title' => 'My repo', 'url' => 'https://example.com/repo']);
 
     $response = $this->get('/ada');
 
@@ -13,7 +13,7 @@ test('a public page renders username, bio and visible links', function () {
         ->assertSee('@ada')
         ->assertSee('Math &amp; code.', false)
         ->assertSee('My repo')
-        ->assertSee('https://example.com/repo');
+        ->assertSee(route('link.visit', $link));
 });
 
 test('an unknown username returns 404', function () {

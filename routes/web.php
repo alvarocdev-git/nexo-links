@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\ClickRedirectController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicPageController;
@@ -9,8 +11,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/l/{link}', ClickRedirectController::class)->name('link.visit');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [LinkController::class, 'index'])->name('dashboard');
+    Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
     Route::post('/links', [LinkController::class, 'store'])->name('links.store');
     Route::patch('/links/reorder', [LinkController::class, 'reorder'])->name('links.reorder');
     Route::patch('/links/{link}', [LinkController::class, 'update'])->name('links.update');

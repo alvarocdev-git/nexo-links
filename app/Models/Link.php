@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
+ * @property-read int|null $clicks_count
  * @property int $page_id
  * @property int $position
  * @property bool $is_visible
