@@ -20,12 +20,15 @@ class LinkController extends Controller
     {
         $page = $this->pageOf($request);
 
+        /** @var array<string, array{label: string, url: string, type: string}> $platforms */
+        $platforms = config('nexo.social_platforms');
+
         return view('dashboard', [
             'page' => $page,
             'links' => $page->links()->withCount('clicks')->get(),
             'socialLinks' => $page->socialLinks,
-            'socialPlatforms' => config('nexo.social_platforms'),
-            'socialMeta' => collect(config('nexo.social_platforms'))->map(fn (array $platform): array => [
+            'socialPlatforms' => $platforms,
+            'socialMeta' => collect($platforms)->map(fn (array $platform): array => [
                 'type' => $platform['type'],
                 'prefix' => str_starts_with($platform['url'], 'https://')
                     ? str_replace('{value}', '', substr($platform['url'], 8))
