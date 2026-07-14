@@ -32,7 +32,8 @@ What Nexo solves that mainstream alternatives don't:
   profile lives in the footer or as a regular link button
 - Contact link types: phone (`tel:`), email (`mailto:`) and a WhatsApp link
   builder (phone + prefilled message → `wa.me` URL)
-- Profile customization: avatar, bio, color themes
+- Profile customization: avatar, bio, banner image, page background
+  (solid color or gradient) and color palette presets
 - Configurable footer attribution per instance (env): defaults to
   "made with Nexo" → repo; the reference deploy shows
   "powered by alvarocdev.com"
