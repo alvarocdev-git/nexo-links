@@ -41,6 +41,9 @@ What Nexo solves that mainstream alternatives don't:
   and a live example page
 - Auto-generated QR code (SVG, server-side, no third-party services)
   downloadable from the dashboard
+- Multilingual interface: Spanish, English and Portuguese, with a visible
+  language switcher that updates everything instantly (public pages pick
+  the visitor's browser language by default)
 - Production deploy on shared hosting (Hostinger, PHP + MySQL)
 
 ## Design principles
@@ -50,6 +53,10 @@ What Nexo solves that mainstream alternatives don't:
 - Distinctive but restrained aesthetics: strong typography, subtle
   micro-animations, first-class dark mode — not another Linktree clone
 - Cross-browser: Chrome, Firefox, Safari (incl. iOS) and Edge
+- Accessible by default (WCAG AA as the baseline): semantic HTML, visible
+  focus states, keyboard navigation, aria labels on icon-only controls,
+  reduced-motion support and AA color contrast — plus a dedicated audit
+  before v1
 
 ## Out of scope (for now)
 
@@ -65,6 +72,8 @@ What Nexo solves that mainstream alternatives don't:
 - Social login with Google and GitHub (Laravel Socialite); Apple Sign-In
   deliberately skipped at first (requires a paid Apple Developer account)
 - Two-factor authentication
+- Per-user content translations: owners translate their own bio and link
+  titles per language, so visitors see the page in their language
 
 ## Tech stack
 
