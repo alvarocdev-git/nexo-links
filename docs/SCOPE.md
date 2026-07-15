@@ -89,6 +89,12 @@ What Nexo Links solves that mainstream alternatives don't:
 - Branded email template: publish the mail views and add the Nexo Links
   mark to transactional emails (verification, password reset)
 - Branded 404/error pages
+- Explore directory: pages pick a category (creator, music, photography,
+  business, dev, art, education, …) and can **opt in** to being listed on
+  a public per-instance `/explore` page with category filters. Strictly
+  opt-in (privacy default: unlisted), per instance (no central service —
+  that would contradict self-hosting), moderated via the existing report
+  system; `explore`/`discover` become reserved usernames
 
 ## Tech stack
 
