@@ -17,7 +17,20 @@ test('security headers are sent on public pages', function () {
     expect($response->headers->get('Content-Security-Policy'))
         ->toContain("default-src 'self'")
         ->toContain("frame-ancestors 'none'")
-        ->toContain("object-src 'none'");
+        ->toContain("object-src 'none'")
+        ->toContain('upgrade-insecure-requests');
+});
+
+test('the htaccess CSP stays in sync with the middleware', function () {
+    $page = Page::factory()->create();
+
+    $middlewarePolicy = $this->get('/'.$page->username)
+        ->headers->get('Content-Security-Policy');
+
+    $htaccess = file_get_contents(public_path('.htaccess'));
+    preg_match('/Content-Security-Policy "([^"]+)"/', $htaccess, $matches);
+
+    expect($matches[1] ?? null)->toBe($middlewarePolicy);
 });
 
 test('security headers are sent on the dashboard', function () {

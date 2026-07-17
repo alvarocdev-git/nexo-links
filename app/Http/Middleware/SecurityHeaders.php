@@ -19,6 +19,9 @@ class SecurityHeaders
 
         // Skipped while the Vite dev server is running (assets come from
         // another origin in local development).
+        // KEEP IN SYNC with public/.htaccess, which re-asserts this same
+        // policy at the web-server level because some shared hosts replace
+        // PHP-sent CSP headers with their own.
         if (! file_exists(public_path('hot'))) {
             $response->headers->set('Content-Security-Policy', implode('; ', [
                 "default-src 'self'",
@@ -31,6 +34,7 @@ class SecurityHeaders
                 "base-uri 'self'",
                 "form-action 'self'",
                 "frame-ancestors 'none'",
+                'upgrade-insecure-requests',
             ]));
         }
 

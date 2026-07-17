@@ -135,3 +135,9 @@ secrets first (**Settings → Secrets and variables → Actions**):
 - Set `NEXO_EXAMPLE_USERNAME` to your real username once your page exists
 - `APP_DEBUG` is `false` and `php artisan config:cache` was re-run after
   any `.env` change
+- The full CSP survives host overrides (some hosts' Force HTTPS replaces
+  PHP-sent CSP headers; `public/.htaccess` re-asserts the app's policy):
+  ```bash
+  curl -sSI https://nexolinks.alvarocdev.com | grep -i content-security-policy
+  # must show the full policy, not just "upgrade-insecure-requests"
+  ```
