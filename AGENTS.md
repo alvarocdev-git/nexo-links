@@ -80,6 +80,12 @@ the app is then at `http://localhost:<APP_PORT>`.
 
 ## Accumulated context
 
+- **2026-07-19** — Retroactive open-source audit passed: full git history
+  (37 commits) and HEAD checked — no secrets, no `.env` ever committed, no
+  real credentials/IPs/server data; only intentional public info (docs use
+  Alvaro's domain as the self-hosting example). Informational: commit author
+  email is `alvaro@mc4pc.com`; sender mailbox appears in DEPLOYMENT.md's
+  env template.
 - **2026-07-19** — Standards validation session. Pending on the server:
   update `NEXO_ATTRIBUTION_URL` to
   `https://alvarocdev.com/?utm_source=nexo-links&utm_medium=powered-by`
