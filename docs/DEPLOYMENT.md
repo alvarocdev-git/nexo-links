@@ -11,13 +11,13 @@ assets are built locally or by CI.
 1. hPanel → **Domains → Subdomains** → create `nexolinks` (→ `nexolinks.alvarocdev.com`).
 2. The app must serve from its `public/` folder. Point the subdomain's
    document root at `<app>/public`, e.g. app in
-   `~/domains/alvarocdev.com/nexo` → document root
-   `~/domains/alvarocdev.com/nexo/public`.
+   `~/domains/alvarocdev.com/nexo-links` → document root
+   `~/domains/alvarocdev.com/nexo-links/public`.
    If hPanel doesn't let you pick a folder outside the subdomain root, create
    the subdomain first and replace its folder with a symlink:
    ```bash
    rm -rf ~/domains/alvarocdev.com/public_html/nexolinks
-   ln -s ~/domains/alvarocdev.com/nexo/public ~/domains/alvarocdev.com/public_html/nexolinks
+   ln -s ~/domains/alvarocdev.com/nexo-links/public ~/domains/alvarocdev.com/public_html/nexolinks
    ```
 3. hPanel → **Security → SSL** → issue the free certificate for the subdomain.
 4. hPanel → **Advanced → PHP Configuration** → select **PHP 8.3+**.
@@ -90,7 +90,7 @@ Build locally and upload once:
 
 ```bash
 npm ci && npm run build
-rsync -avz public/build/ user@host:~/domains/alvarocdev.com/nexo/public/build/
+rsync -avz public/build/ user@host:~/domains/alvarocdev.com/nexo-links/public/build/
 ```
 
 …or let the GitHub Actions workflow below handle it on every deploy.
@@ -100,7 +100,7 @@ rsync -avz public/build/ user@host:~/domains/alvarocdev.com/nexo/public/build/
 hPanel → **Advanced → Cron Jobs**:
 
 ```
-* * * * * php ~/domains/alvarocdev.com/nexo/artisan schedule:run >> /dev/null 2>&1
+* * * * * php ~/domains/alvarocdev.com/nexo-links/artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## 2. Deploying updates
@@ -108,7 +108,7 @@ hPanel → **Advanced → Cron Jobs**:
 ### Option A — manual over SSH
 
 ```bash
-cd ~/domains/alvarocdev.com/nexo && bash scripts/deploy.sh
+cd ~/domains/alvarocdev.com/nexo-links && bash scripts/deploy.sh
 ```
 
 Then upload `public/build/` if frontend files changed.
@@ -125,7 +125,7 @@ secrets first (**Settings → Secrets and variables → Actions**):
 | `DEPLOY_PORT` | `65002` |
 | `DEPLOY_USER` | `u123456` |
 | `DEPLOY_KEY` | private SSH key with access to the server |
-| `DEPLOY_PATH` | `/home/u123456/domains/alvarocdev.com/nexo` |
+| `DEPLOY_PATH` | `/home/u123456/domains/alvarocdev.com/nexo-links` |
 
 ## 3. Post-deploy checklist
 
