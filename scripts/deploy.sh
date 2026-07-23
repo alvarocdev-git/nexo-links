@@ -14,6 +14,9 @@ php artisan migrate --force
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+# Flush the rendered-page cache: it bakes in content-hashed @vite asset URLs, and
+# a fresh public/build changes those hashes — stale entries would 404 the CSS.
+php artisan cache:clear
 
 php artisan up
 

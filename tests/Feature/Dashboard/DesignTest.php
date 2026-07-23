@@ -4,6 +4,15 @@ use App\Models\Page;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
+// A real 1x1 PNG so the `image` validation rule passes without the GD extension
+// (UploadedFile::fake()->image() needs GD, which the container test runner lacks).
+function fakeImageUpload(string $name): UploadedFile
+{
+    $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
+
+    return UploadedFile::fake()->createWithContent($name, $png);
+}
+
 test('guests cannot open the design page', function () {
     $this->get('/design')->assertRedirect('/login');
 });
@@ -68,7 +77,7 @@ test('a user can upload and replace an avatar', function () {
     $this->actingAs($page->user)->patch('/design', [
         'theme' => 'default',
         'background_type' => 'default',
-        'avatar' => UploadedFile::fake()->image('me.png', 400, 400),
+        'avatar' => fakeImageUpload('me.png'),
     ]);
 
     $firstPath = $page->refresh()->avatar_path;
@@ -77,7 +86,7 @@ test('a user can upload and replace an avatar', function () {
     $this->actingAs($page->user)->patch('/design', [
         'theme' => 'default',
         'background_type' => 'default',
-        'avatar' => UploadedFile::fake()->image('new.png', 400, 400),
+        'avatar' => fakeImageUpload('new.png'),
     ]);
 
     Storage::disk('public')->assertMissing($firstPath);
@@ -91,7 +100,7 @@ test('a user can remove their banner', function () {
     $this->actingAs($page->user)->patch('/design', [
         'theme' => 'default',
         'background_type' => 'default',
-        'banner' => UploadedFile::fake()->image('banner.png', 1200, 400),
+        'banner' => fakeImageUpload('banner.png'),
     ]);
 
     $path = $page->refresh()->banner_path;

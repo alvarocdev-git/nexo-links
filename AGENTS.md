@@ -80,6 +80,30 @@ the app is then at `http://localhost:<APP_PORT>`.
 
 ## Accumulated context
 
+- **2026-07-23** — **Nexo ID SSO client integrated** (ecosystem FASE 1; copied from the
+  standards-repo template `~/alvaro/templates/nexo-sso-client`). Optional and **off by
+  default** (`NEXO_SSO_ENABLED=false`) — standalone local auth is untouched and still the
+  default (AC-CFG-1 asserts the SSO routes 404 when disabled). Files: `config/nexo-sso.php`,
+  `routes/nexo-sso.php` (required in `web.php` **before** the `/{username}` catch-all),
+  `app/Services/NexoSso/*`, `app/Http/Controllers/Auth/NexoSsoController.php`, migration
+  `..._add_nexo_id_sub_to_users_table`. **Key adaptation (the blocker):**
+  `NexoSsoUserResolver::newUser()` provisions the mandatory 1:1 `Page` (with a generated
+  unique, reserved-safe, `Username`-rule-valid handle) inside the user-create transaction —
+  a bare template insert would 404 every dashboard route (`pageOf()` → abort 404). Callback
+  lands on `route('dashboard')`. Login view shows "Continue with Nexo ID" only when enabled.
+  `phpunit.xml` sets `NEXO_SSO_ENABLED=true` (routes evaluate at boot). Register the prod
+  client with redirect `{APP_URL}/auth/nexo/callback` (owner-gated). Also this pass:
+  `reserved_usernames` now covers every top-level GET route segment (`analytics`, `design`,
+  `auth`, `forgot-password`, `reset-password`, `verify-email`, `confirm-password`) with a
+  **route-enumerating guardian** test (`tests/Feature/ReservedUsernamesTest.php`) replacing
+  the old 2-URL check; `guzzlehttp/guzzle` bumped ≥7.15.1 (4 medium advisories, `composer
+  audit` now clean) and `firebase/php-jwt` added; `DesignTest` made GD-independent
+  (`createWithContent` + real PNG bytes) so it runs on the GD-less container runner;
+  `deploy.sh` now `cache:clear`s (page cache bakes in @vite hashes); CI gained `composer
+  audit`; the `alvarocdev` example handle genericised to `yourname`. 198 tests, pint +
+  Larastan + audit + i18n all green. **Deferred to FASE 5** (bucket B/F): i18n `--check`
+  drift guardian + CI node step, stricter public-page CSP, unique-visitor multi-day label,
+  countdown reload guard. Source: `~/alvaro/inbox/ecosystem-audit`.
 - **2026-07-19** — Retroactive open-source audit passed: full git history
   (37 commits) and HEAD checked — no secrets, no `.env` ever committed, no
   real credentials/IPs/server data; only intentional public info (docs use

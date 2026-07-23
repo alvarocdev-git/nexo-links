@@ -28,6 +28,9 @@ jobs:
       - name: Static analysis (Larastan)
         run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
 
+      - name: Security audit (dependencies)
+        run: composer audit
+
   tests:
     name: Tests
     runs-on: ubuntu-latest

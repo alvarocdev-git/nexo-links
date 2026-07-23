@@ -77,6 +77,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// Nexo ID SSO client. No-op in standalone mode (NEXO_SSO_ENABLED unset); must be
+// required before the catch-all so /auth/nexo/* can never be shadowed.
+require __DIR__.'/nexo-sso.php';
+
 // Catch-all public page route: must stay last so it never shadows app routes.
 Route::get('/{username}', [PublicPageController::class, 'show'])
     ->where('username', '[a-z0-9]+(?:[-_][a-z0-9]+)*')

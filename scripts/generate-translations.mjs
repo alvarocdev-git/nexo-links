@@ -10,6 +10,16 @@ const PAGINATION_KEYS = ['next', 'previous'];
 // Nexo-specific strings (and tone overrides). Keys are the English source.
 const nexo = {
     es: {
+        'An account with this email already exists. Verify your email on Nexo ID first.':
+            'Ya existe una cuenta con este correo. Verifica tu correo en Nexo ID primero.',
+        'Continue with Nexo ID': 'Continuar con Nexo ID',
+        'Sign-in with Nexo ID failed. Please try again.':
+            'Falló el inicio de sesión con Nexo ID. Inténtalo de nuevo.',
+        'Sign-in with Nexo ID is temporarily unavailable. Please try again later.':
+            'El inicio de sesión con Nexo ID no está disponible por ahora. Inténtalo de nuevo más tarde.',
+        'The sign-in request could not be validated. Please try again.':
+            'No se pudo validar la solicitud de inicio de sesión. Inténtalo de nuevo.',
+        'or': 'o',
         ':count click|:count clicks': ':count clic|:count clics',
         ':days days': ':days días',
         'Accent palette': 'Paleta de acento',
@@ -114,7 +124,7 @@ const nexo = {
         'Unique visitors': 'Visitantes únicos',
         'Use the international format, e.g. +5491122334455.': 'Usa el formato internacional, p. ej. +5491122334455.',
         'Use this link': 'Usar este link',
-        'Use your handle without the @, e.g. alvarocdev.': 'Usa tu usuario sin el @, p. ej. alvarocdev.',
+        'Use your handle without the @, e.g. yourname.': 'Usa tu usuario sin el @, p. ej. yourname.',
         'Used for your avatar ring and highlighted links.': 'Se usa en el anillo de tu avatar y en los links destacados.',
         'Username': 'Nombre de usuario',
         'View my page': 'Ver mi página',
@@ -207,6 +217,16 @@ const nexo = {
         'Phone number': 'Número de teléfono',
     },
     pt_BR: {
+        'An account with this email already exists. Verify your email on Nexo ID first.':
+            'Já existe uma conta com este e-mail. Verifique seu e-mail no Nexo ID primeiro.',
+        'Continue with Nexo ID': 'Continuar com o Nexo ID',
+        'Sign-in with Nexo ID failed. Please try again.':
+            'O login com o Nexo ID falhou. Tente novamente.',
+        'Sign-in with Nexo ID is temporarily unavailable. Please try again later.':
+            'O login com o Nexo ID está temporariamente indisponível. Tente novamente mais tarde.',
+        'The sign-in request could not be validated. Please try again.':
+            'Não foi possível validar a solicitação de login. Tente novamente.',
+        'or': 'ou',
         ':count click|:count clicks': ':count clique|:count cliques',
         ':days days': ':days dias',
         'Accent palette': 'Paleta de destaque',
@@ -311,7 +331,7 @@ const nexo = {
         'Unique visitors': 'Visitantes únicos',
         'Use the international format, e.g. +5491122334455.': 'Use o formato internacional, ex.: +5491122334455.',
         'Use this link': 'Usar este link',
-        'Use your handle without the @, e.g. alvarocdev.': 'Use seu usuário sem o @, ex.: alvarocdev.',
+        'Use your handle without the @, e.g. yourname.': 'Use seu usuário sem o @, ex.: yourname.',
         'Used for your avatar ring and highlighted links.': 'Usado no anel do seu avatar e nos links destacados.',
         'Username': 'Nome de usuário',
         'View my page': 'Ver minha página',

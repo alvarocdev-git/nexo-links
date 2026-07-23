@@ -51,7 +51,7 @@ class StoreSocialLinkRequest extends FormRequest
             'platform.unique' => __('You already added this platform.'),
             'value.regex' => match (config('nexo.social_platforms.'.$this->input('platform').'.type')) {
                 'phone' => __('Use the international format, e.g. +5491122334455.'),
-                default => __('Use your handle without the @, e.g. alvarocdev.'),
+                default => __('Use your handle without the @, e.g. yourname.'),
             },
         ];
     }

@@ -44,4 +44,21 @@
             </x-primary-button>
         </div>
     </form>
+
+    @if (config('nexo-sso.enabled'))
+        <div class="mt-6">
+            <div class="relative flex items-center">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="mx-3 text-xs uppercase text-gray-500">{{ __('or') }}</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <x-input-error :messages="$errors->get('nexo_sso')" class="mt-4" />
+
+            <a href="{{ route('nexo-sso.redirect') }}"
+               class="mt-4 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                {{ __('Continue with Nexo ID') }}
+            </a>
+        </div>
+    @endif
 </x-guest-layout>
