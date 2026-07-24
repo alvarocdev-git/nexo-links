@@ -12,28 +12,29 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50" style="font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">
-    <div class="mx-auto flex min-h-screen w-full max-w-4xl flex-col px-5">
+<body class="flex min-h-screen flex-col bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50" style="font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-surface focus:px-4 focus:py-2 focus:text-ink">
+        {{ __('Skip to content') }}
+    </a>
 
-        <!-- Nav -->
-        <nav class="flex items-center justify-between py-6">
-            <span class="flex items-center gap-2 text-lg font-bold tracking-tight">
-                <x-application-logo class="h-6 w-6" />
-                {{ config('app.name') }}
-            </span>
-            <div class="flex items-center gap-4 text-sm">
-                <x-nexo-app-switcher />
-                <x-language-switcher />
-                <x-nexo-theme-toggle />
-                @auth
-                    <a href="{{ route('dashboard') }}" class="font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400">{{ __('Dashboard') }} →</a>
-                @else
-                    <a href="{{ route('login') }}" class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">{{ __('Log in') }}</a>
-                    <a href="{{ route('register') }}" class="rounded-full bg-neutral-900 px-4 py-2 font-medium text-white transition hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">{{ __('Create your page') }}</a>
-                @endauth
-            </div>
-        </nav>
+    {{-- Standard full-width ecosystem chrome: same header/footer and element order
+         as nexotools/nexoid (wordmark + nav + app-switcher + locale + theme +
+         account). The marketing content stays in a centered container below. --}}
+    <x-nexo-header brand="Nexo Links" mark="/ecosystem/nexolinks.svg" :home="url('/')">
+        <x-slot:nav>
+            <a href="{{ route('help') }}" class="nexo-btn nexo-btn--ghost">{{ __('nexo.help.title') }}</a>
+        </x-slot:nav>
+        <x-slot:actions>
+            @auth
+                <a href="{{ route('dashboard') }}" class="nexo-btn nexo-btn--ghost">{{ __('Dashboard') }}</a>
+            @else
+                <a href="{{ route('login') }}" class="nexo-btn nexo-btn--ghost">{{ __('Log in') }}</a>
+                <a href="{{ route('register') }}" class="nexo-btn nexo-btn--primary">{{ __('Create your page') }}</a>
+            @endauth
+        </x-slot:actions>
+    </x-nexo-header>
 
+    <main id="main" class="mx-auto flex w-full max-w-4xl flex-1 flex-col px-5">
         <!-- Hero -->
         <header class="py-16 text-center sm:py-24">
             <h1 class="mx-auto max-w-2xl text-balance text-4xl font-bold tracking-tight sm:text-6xl">
@@ -57,6 +58,12 @@
                     </a>
                 @endif
             </div>
+
+            <p class="mt-6 text-sm text-neutral-500 dark:text-neutral-400">
+                <a href="{{ config('nexo.repository_url') }}" rel="noopener" class="hover:text-neutral-700 dark:hover:text-neutral-300">
+                    {{ __('Open source on GitHub') }} ↗
+                </a>
+            </p>
         </header>
 
         <!-- Features -->
@@ -78,19 +85,8 @@
                 </article>
             @endforeach
         </section>
+    </main>
 
-        <!-- Footer -->
-        <footer class="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 py-8 text-sm text-neutral-500 dark:border-neutral-800">
-            <div class="flex flex-wrap items-center gap-4">
-                <a href="{{ route('help') }}" class="hover:text-neutral-700 dark:hover:text-neutral-300">{{ __('nexo.help.title') }}</a>
-                <a href="{{ config('nexo.repository_url') }}" rel="noopener" class="hover:text-neutral-700 dark:hover:text-neutral-300">
-                    {{ __('Open source on GitHub') }} ↗
-                </a>
-            </div>
-            <a href="{{ config('nexo.attribution.url') }}" rel="noopener" class="hover:text-neutral-700 dark:hover:text-neutral-300">
-                {{ config('nexo.attribution.label') }}
-            </a>
-        </footer>
-    </div>
+    <x-nexo-footer />
 </body>
 </html>

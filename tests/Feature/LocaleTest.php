@@ -6,11 +6,11 @@ test('the interface defaults to english', function () {
     $this->get('/')->assertOk()->assertSee('Create your page');
 });
 
-test('the lang parameter switches the language and persists in the session', function () {
-    $this->get('/?lang=es')->assertOk()->assertSee('Crea tu página');
+test('the lang parameter switches the language and stores it in the shared nexo-lang cookie', function () {
+    $this->get('/?lang=es')->assertOk()->assertSee('Crea tu página')->assertPlainCookie('nexo-lang', 'es');
 
-    // Follow-up request without the parameter keeps the choice.
-    $this->get('/')->assertOk()->assertSee('Crea tu página');
+    // A later request carrying the cookie keeps the choice (shared across tools).
+    $this->withUnencryptedCookie('nexo-lang', 'es')->get('/')->assertOk()->assertSee('Crea tu página');
 });
 
 test('portuguese is available', function () {
@@ -35,17 +35,16 @@ test('public pages pick the visitor browser language', function () {
 });
 
 test('an explicit choice beats the browser language', function () {
-    $this->get('/?lang=en')->assertOk();
+    $this->get('/?lang=en')->assertOk()->assertPlainCookie('nexo-lang', 'en');
 
-    $this->get('/', ['Accept-Language' => 'es-AR'])
+    $this->withUnencryptedCookie('nexo-lang', 'en')
+        ->get('/', ['Accept-Language' => 'es-AR'])
         ->assertOk()
         ->assertSee('Create your page');
 });
 
 test('validation messages are translated', function () {
-    $this->get('/?lang=es');
-
-    $response = $this->post('/register', [
+    $response = $this->withUnencryptedCookie('nexo-lang', 'es')->post('/register', [
         'name' => 'Test',
         'username' => 'HAS UPPER',
         'email' => 'not-an-email',
