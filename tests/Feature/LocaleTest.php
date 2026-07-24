@@ -14,7 +14,7 @@ test('the lang parameter switches the language and persists in the session', fun
 });
 
 test('portuguese is available', function () {
-    $this->get('/?lang=pt_BR')->assertOk()->assertSee('Crie sua página');
+    $this->get('/?lang=pt')->assertOk()->assertSee('Crie sua página');
 });
 
 test('an unsupported lang parameter is ignored', function () {
@@ -60,7 +60,7 @@ test('validation messages are translated', function () {
 });
 
 test('the language switcher is visible on the landing and dashboard', function () {
-    $this->get('/')->assertOk()->assertSee('lang="pt-BR"', false);
+    $this->get('/')->assertOk()->assertSee('lang="pt"', false);
 
     $page = Page::factory()->create();
     $this->actingAs($page->user)->get('/dashboard')->assertOk()->assertSee('lang="es"', false);

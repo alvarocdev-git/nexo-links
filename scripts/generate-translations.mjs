@@ -1,5 +1,6 @@
-// Builds lang/{es,pt_BR} from laravel-lang (framework + Breeze strings)
-// merged with Nexo's own translations below.
+// Builds lang/{es,pt} from laravel-lang (framework + Breeze strings) merged with
+// Nexo's own translations below. Portuguese uses the canonical ecosystem code
+// `pt`, but its content is sourced from laravel-lang's Brazilian `pt_BR` locale.
 // Run after adding new __() strings: node scripts/generate-translations.mjs
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 
@@ -216,7 +217,7 @@ const nexo = {
         'Country code': 'Código de país',
         'Phone number': 'Número de teléfono',
     },
-    pt_BR: {
+    pt: {
         'An account with this email already exists. Verify your email on Nexo ID first.':
             'Já existe uma conta com este e-mail. Verifique seu e-mail no Nexo ID primeiro.',
         'Continue with Nexo ID': 'Continuar com o Nexo ID',
@@ -448,8 +449,15 @@ const nest = (flat) => {
     return out;
 };
 
-for (const locale of ['es', 'pt_BR']) {
-    const base = `vendor/laravel-lang/lang/locales/${locale}`;
+// Output locale -> laravel-lang source locale. `pt` (canonical ecosystem code)
+// carries Brazilian Portuguese content sourced from laravel-lang's `pt_BR`.
+const locales = [
+    { code: 'es', source: 'es' },
+    { code: 'pt', source: 'pt_BR' },
+];
+
+for (const { code, source } of locales) {
+    const base = `vendor/laravel-lang/lang/locales/${source}`;
     const php = JSON.parse(readFileSync(`${base}/php.json`, 'utf8'));
     const json = JSON.parse(readFileSync(`${base}/json.json`, 'utf8'));
 
@@ -461,12 +469,12 @@ for (const locale of ['es', 'pt_BR']) {
         else groups.validation[key] = value;
     }
 
-    mkdirSync(`lang/${locale}`, { recursive: true });
+    mkdirSync(`lang/${code}`, { recursive: true });
     for (const [group, entries] of Object.entries(groups)) {
-        writeFileSync(`lang/${locale}/${group}.php`, `<?php\n\nreturn ${phpExport(nest(entries))};\n`);
+        writeFileSync(`lang/${code}/${group}.php`, `<?php\n\nreturn ${phpExport(nest(entries))};\n`);
     }
 
-    const merged = { ...json, ...nexo[locale] };
-    writeFileSync(`lang/${locale}.json`, JSON.stringify(merged, null, 4) + '\n');
-    console.log(`✓ ${locale}: ${Object.keys(merged).length} JSON strings, validation/auth/passwords/pagination PHP files`);
+    const merged = { ...json, ...nexo[code] };
+    writeFileSync(`lang/${code}.json`, JSON.stringify(merged, null, 4) + '\n');
+    console.log(`✓ ${code}: ${Object.keys(merged).length} JSON strings, validation/auth/passwords/pagination PHP files`);
 }

@@ -61,7 +61,7 @@ return [
     'locales' => [
         'en' => 'English',
         'es' => 'Español',
-        'pt_BR' => 'Português',
+        'pt' => 'Português',
     ],
 
     /*

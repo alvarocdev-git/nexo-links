@@ -11,7 +11,7 @@
 Open-source, self-hosted link-in-bio platform (Linktree alternative): each
 user gets a public page at `/{username}` with links, cookieless analytics,
 scheduling, themes, social icons, QR sharing and a report system. Multi-user,
-multilingual (en/es/pt_BR). **In production** at https://nexolinks.alvarocdev.com
+multilingual (en/es/pt). **In production** at https://nexolinks.alvarocdev.com
 (Alvaro's reference instance, Hostinger shared hosting).
 
 ## Stack
@@ -45,7 +45,8 @@ the app is then at `http://localhost:<APP_PORT>`.
 - **One Conventional Commit per phase/feature, in English**; tests + Pint +
   Larastan must be green and the change verified end-to-end before committing.
 - **Every user-facing string goes through `__()`**. New strings must be added
-  (en → es + pt_BR) to `scripts/generate-translations.mjs`, then run it.
+  (en → es + pt, canonical code `pt` sourced from laravel-lang `pt_BR`) to
+  `scripts/generate-translations.mjs`, then run it.
   Custom rule messages need `$fail(...)->translate()`.
 - **Generated assets are scripted, never hand-edited**: brand/favicons/OG via
   `scripts/generate-brand-assets.mjs` (source: `resources/brand/mark.svg`),

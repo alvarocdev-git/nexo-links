@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ClickRedirectController;
 use App\Http\Controllers\DesignController;
+use App\Http\Controllers\HelpController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\OwnerReportController;
 use App\Http\Controllers\ProfileController;
@@ -22,7 +23,9 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::view('/help', 'help')->name('help');
+// Help center. Registered before the /{username} catch-all so it is never
+// shadowed. The FAQ content is translatable (lang/*/help.php).
+Route::get('/help', HelpController::class)->name('help');
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 

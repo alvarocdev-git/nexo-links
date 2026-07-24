@@ -2,25 +2,22 @@
 
 use App\Models\Page;
 
-test('the help page renders every topic', function () {
+test('the help center renders the FAQs', function () {
     $this->get('/help')
         ->assertOk()
-        ->assertSee('What can I do in Nexo Links?')
+        ->assertSee(__('nexo.help.title'))
         ->assertSeeInOrder([
-            'Create your account',
-            'Add and organize your links',
-            'Schedule, highlight and countdowns',
-            'Contact buttons and WhatsApp',
-            'Social icons',
-            'Make it yours',
-            'Understand your analytics',
-            'Share your page',
+            'How do I create my page?',
+            'How do I add and reorder my links?',
+            'How do the social icons work?',
+            'What do the analytics show, and do they track visitors?',
+            'How do I share my page?',
         ]);
 });
 
-test('the help page is translated', function () {
-    $this->get('/help?lang=es')->assertOk()->assertSee('¿Qué puedo hacer en Nexo Links?');
-    $this->get('/help?lang=pt_BR')->assertOk()->assertSee('O que posso fazer no Nexo Links?');
+test('the help center is translated', function () {
+    $this->get('/help?lang=es')->assertOk()->assertSee('Centro de ayuda')->assertSee('¿Cómo creo mi página?');
+    $this->get('/help?lang=pt')->assertOk()->assertSee('Central de ajuda')->assertSee('Como crio a minha página?');
 });
 
 test('the landing links to the help page', function () {

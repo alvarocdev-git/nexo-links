@@ -87,7 +87,7 @@
         <!-- Footer -->
         <footer class="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 py-8 text-sm text-neutral-500 dark:border-neutral-800">
             <div class="flex flex-wrap items-center gap-4">
-                <a href="{{ route('help') }}" class="hover:text-neutral-700 dark:hover:text-neutral-300">{{ __('Help') }}</a>
+                <a href="{{ route('help') }}" class="hover:text-neutral-700 dark:hover:text-neutral-300">{{ __('nexo.help.title') }}</a>
                 <a href="{{ config('nexo.repository_url') }}" rel="noopener" class="hover:text-neutral-700 dark:hover:text-neutral-300">
                     {{ __('Open source on GitHub') }} ↗
                 </a>
