@@ -27,8 +27,13 @@ even on cheap shared hosting (PHP + MySQL).
 - **Social icons footer** — 13 platforms plus email/phone/website, with a
   WhatsApp link builder (country selector + prefilled message).
 - **Share anywhere** — server-generated SVG QR code, ready to print.
-- **Multilingual** — English, Spanish and Portuguese out of the box, with a
-  visible switcher; public pages follow the visitor's browser language.
+- **Multilingual** — English, Spanish and Portuguese (`en`/`es`/`pt`) out of
+  the box, with a visible switcher; public pages follow the visitor's browser
+  language.
+- **Part of the Nexo ecosystem** — the owner dashboard wears the shared Nexo
+  chrome (violet brand, light/dark toggle, app-switcher and footer that link
+  the other tools), while every public link-in-bio page keeps its own
+  configurable per-page theme.
 - **Community-safe** — anonymous report system for broken or abusive links,
   with owner notifications in the dashboard.
 - **Accessible** — WCAG AA baseline: keyboard navigation, focus rings,
@@ -40,7 +45,7 @@ Laravel 13 · MySQL 8 · Blade + Alpine.js + Tailwind CSS · Vite
 
 Quality: [Pint](https://laravel.com/docs/pint) ·
 [Larastan](https://github.com/larastan/larastan) ·
-[Pest](https://pestphp.com) (170+ tests) · GitHub Actions CI
+[Pest](https://pestphp.com) (200+ tests) · GitHub Actions CI
 
 ## Quick start (local)
 
@@ -74,6 +79,8 @@ See the step-by-step guide: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
 | `NEXO_ATTRIBUTION_LABEL` | Public page footer text | `made with Nexo Links` |
 | `NEXO_ATTRIBUTION_URL` | Footer link target | this repo |
 | `NEXO_EXAMPLE_USERNAME` | Page linked as the landing's live example | `demo` |
+| `NEXO_ECOSYSTEM_CURRENT` | This tool's key in the shared app-switcher | `nexolinks` |
+| `NEXO_SUPPORT_EMAIL` | Contact address on the /help center | `hola@alvarocdev.com` |
 
 Theme presets, social platforms, reserved usernames, report reasons and
 locales live in [config/nexo.php](config/nexo.php).
