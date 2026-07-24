@@ -1,3 +1,12 @@
+/* Nexo brand tokens FIRST, then the shared chrome layer (header/footer/switchers),
+   then Tailwind. Vite inlines these @imports at build time. The chrome classes
+   (.nexo-*) read the --nexo-* tokens, so the ecosystem chrome looks identical
+   everywhere; the tool styles its own content with Tailwind utilities.
+   Dark mode is driven by the stamped [data-theme="dark"] (theme-init + toggle),
+   configured in tailwind.config.js — see darkMode there. */
+@import './nexo-tokens.css';
+@import './nexo-ui.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

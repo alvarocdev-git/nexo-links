@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 import Sortable from 'sortablejs';
+import './nexo-ui.js'; // registers the shared chrome components on alpine:init
 
 window.Alpine = Alpine;
 

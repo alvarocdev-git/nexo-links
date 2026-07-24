@@ -9,10 +9,56 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    // Dark utilities follow the stamped [data-theme="dark"] (theme-init + toggle),
+    // not prefers-color-scheme — so an explicit choice wins over the OS while the
+    // OS preference is still honoured (theme-init stamps it before first paint).
+    darkMode: ['selector', '[data-theme="dark"]'],
+
     theme: {
         extend: {
             fontFamily: {
                 sans: [...defaultTheme.fontFamily.sans],
+            },
+
+            // Nexo brand + semantic colors → nexo-tokens.css variables. Additive:
+            // the default palette (neutral/indigo/fuchsia/… used by the per-page
+            // public-page theming) is left untouched on purpose. Chrome uses the
+            // .nexo-* classes; content can use bg-surface / text-ink / bg-brand-600.
+            colors: {
+                brand: {
+                    50: 'var(--nexo-violet-50)',
+                    100: 'var(--nexo-violet-100)',
+                    200: 'var(--nexo-violet-200)',
+                    300: 'var(--nexo-violet-300)',
+                    400: 'var(--nexo-violet-400)',
+                    500: 'var(--nexo-violet-500)',
+                    600: 'var(--nexo-violet-600)',
+                    700: 'var(--nexo-violet-700)',
+                    800: 'var(--nexo-violet-800)',
+                    900: 'var(--nexo-violet-900)',
+                    950: 'var(--nexo-violet-950)',
+                },
+                primary: {
+                    DEFAULT: 'var(--nexo-primary)',
+                    hover: 'var(--nexo-primary-hover)',
+                    fg: 'var(--nexo-primary-fg)',
+                },
+                bg: {
+                    DEFAULT: 'var(--nexo-bg)',
+                    subtle: 'var(--nexo-bg-subtle)',
+                },
+                surface: {
+                    DEFAULT: 'var(--nexo-surface)',
+                    raised: 'var(--nexo-surface-raised)',
+                    sunken: 'var(--nexo-surface-sunken)',
+                },
+                ink: 'var(--nexo-text)',
+                muted: 'var(--nexo-text-muted)',
+                subtle: 'var(--nexo-text-subtle)',
+                line: {
+                    DEFAULT: 'var(--nexo-border)',
+                    strong: 'var(--nexo-border-strong)',
+                },
             },
         },
     },
