@@ -31,7 +31,7 @@
             <div class="flex items-center gap-4 text-sm">
                 <x-language-switcher />
                 @auth
-                    <a href="{{ route('dashboard') }}" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">{{ __('Dashboard') }} →</a>
+                    <a href="{{ route('dashboard') }}" class="font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400">{{ __('Dashboard') }} →</a>
                 @else
                     <a href="{{ route('login') }}" class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">{{ __('Log in') }}</a>
                     <a href="{{ route('register') }}" class="rounded-full bg-neutral-900 px-4 py-2 font-medium text-white transition hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">{{ __('Create your page') }}</a>
@@ -43,7 +43,7 @@
         <header class="py-16 text-center sm:py-24">
             <h1 class="mx-auto max-w-2xl text-balance text-4xl font-bold tracking-tight sm:text-6xl">
                 {{ __('Your links.') }}
-                <span class="bg-gradient-to-r from-indigo-500 to-fuchsia-500 bg-clip-text text-transparent">{{ __('Your domain.') }}</span>
+                <span class="bg-gradient-to-r from-brand-500 to-brand-600 bg-clip-text text-transparent">{{ __('Your domain.') }}</span>
                 {{ __('Your data.') }}
             </h1>
             <p class="mx-auto mt-6 max-w-xl text-balance text-lg text-neutral-600 dark:text-neutral-400">
@@ -52,12 +52,12 @@
 
             <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <a href="{{ route('register') }}"
-                   class="rounded-full bg-gradient-to-r from-indigo-600 to-fuchsia-600 px-6 py-3 font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 motion-reduce:transition-none">
+                   class="rounded-full bg-gradient-to-r from-brand-600 to-brand-700 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-500/20 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 motion-reduce:transition-none">
                     {{ __('Create your page — it\'s free') }}
                 </a>
                 @if ($exampleUsername !== null)
                     <a href="{{ url('/'.$exampleUsername) }}"
-                       class="rounded-full border border-neutral-300 px-6 py-3 font-medium transition hover:border-neutral-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-neutral-700 dark:hover:border-neutral-500 dark:hover:bg-neutral-900 motion-reduce:transition-none">
+                       class="rounded-full border border-neutral-300 px-6 py-3 font-medium transition hover:border-neutral-400 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:border-neutral-700 dark:hover:border-neutral-500 dark:hover:bg-neutral-900 motion-reduce:transition-none">
                         {{ __('See a live example') }} ↗
                     </a>
                 @endif
@@ -76,7 +76,7 @@
             ] as [$title, $text])
                 <article class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
                     <h2 class="flex items-center gap-2 font-semibold">
-                        <span class="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500" aria-hidden="true"></span>
+                        <span class="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-brand-500 to-brand-600" aria-hidden="true"></span>
                         {{ $title }}
                     </h2>
                     <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{{ $text }}</p>

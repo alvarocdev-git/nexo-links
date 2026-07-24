@@ -19,6 +19,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Help Center Contact
+    |--------------------------------------------------------------------------
+    |
+    | Where the /help "contact us" button points. A support URL wins; otherwise
+    | a mailto: to the support email is used.
+    |
+    */
+
+    'support_url' => env('NEXO_SUPPORT_URL'),
+    'support_email' => env('NEXO_SUPPORT_EMAIL', 'hola@alvarocdev.com'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Report Reasons
     |--------------------------------------------------------------------------
     |
