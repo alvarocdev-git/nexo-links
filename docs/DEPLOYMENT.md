@@ -33,7 +33,7 @@ SSH in (hPanel → Advanced → SSH Access):
 
 ```bash
 cd ~/domains/alvarocdev.com
-git clone https://github.com/alvarocdev-git/nexo-links.git nexo
+git clone https://github.com/nexo-tools/nexo-links.git nexo
 cd nexo
 # --no-scripts + manual package:discover because shared hosts usually
 # disable proc_open, which Composer needs to run post-install scripts

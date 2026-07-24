@@ -8,7 +8,7 @@ reports, translations, docs and code.
 Requirements: Docker. Everything else runs inside containers.
 
 ```bash
-git clone https://github.com/alvarocdev-git/nexo-links.git
+git clone https://github.com/nexo-tools/nexo-links.git
 cd nexo-links
 cp .env.example .env
 docker run --rm -v "$(pwd):/app" -w /app composer:latest composer install

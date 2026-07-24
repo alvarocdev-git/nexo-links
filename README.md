@@ -6,7 +6,7 @@
 
 **Your links. Your domain. Your data.**
 
-[![CI](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml)
+[![CI](https://github.com/nexo-tools/nexo-links/actions/workflows/ci.yml/badge.svg)](https://github.com/nexo-tools/nexo-links/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 </div>
@@ -61,7 +61,7 @@ Requirements: Docker — everything else runs in containers via
 [Laravel Sail](https://laravel.com/docs/sail).
 
 ```bash
-git clone https://github.com/alvarocdev-git/nexo-links.git
+git clone https://github.com/nexo-tools/nexo-links.git
 cd nexo-links
 cp .env.example .env
 docker run --rm -v "$(pwd):/app" -w /app composer:latest composer install

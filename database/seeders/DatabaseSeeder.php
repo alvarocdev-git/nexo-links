@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
         });
 
         collect([
-            ['platform' => 'github', 'value' => 'alvarocdev-git'],
+            ['platform' => 'github', 'value' => 'nexo-tools'],
             ['platform' => 'instagram', 'value' => 'demo'],
             ['platform' => 'email', 'value' => 'demo@nexo.test'],
             ['platform' => 'whatsapp', 'value' => '+5491122334455'],
