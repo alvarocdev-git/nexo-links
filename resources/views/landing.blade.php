@@ -17,7 +17,7 @@
 
     @include('partials.brand-head')
 
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50" style="font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">
     <div class="mx-auto flex min-h-screen w-full max-w-4xl flex-col px-5">
@@ -29,7 +29,9 @@
                 {{ config('app.name') }}
             </span>
             <div class="flex items-center gap-4 text-sm">
+                <x-nexo-app-switcher />
                 <x-language-switcher />
+                <x-nexo-theme-toggle />
                 @auth
                     <a href="{{ route('dashboard') }}" class="font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400">{{ __('Dashboard') }} →</a>
                 @else
