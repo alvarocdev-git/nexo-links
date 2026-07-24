@@ -4,16 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }} — {{ __('Your links. Your domain. Your data.') }}</title>
-    <meta name="description" content="{{ __('Open-source link-in-bio page you host yourself, with visitor analytics that don\'t spy on anyone.') }}">
-    <link rel="canonical" href="{{ url('/') }}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ config('app.name') }} — {{ __('Your links. Your domain. Your data.') }}">
-    <meta property="og:description" content="{{ __('Open-source link-in-bio page you host yourself, with visitor analytics that don\'t spy on anyone.') }}">
-    <meta property="og:url" content="{{ url('/') }}">
-    <meta property="og:image" content="{{ asset('og-image.png') }}">
-    <meta name="twitter:card" content="summary_large_image">
+    <x-nexo-seo
+        title="{{ config('app.name') }} — {{ __('Your links. Your domain. Your data.') }}"
+        description="{{ __('Open-source link-in-bio page you host yourself, with visitor analytics that don\'t spy on anyone.') }}" />
 
     @include('partials.brand-head')
 
