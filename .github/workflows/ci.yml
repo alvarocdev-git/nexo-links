@@ -29,7 +29,9 @@ jobs:
         run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
 
       - name: Security audit (dependencies)
-        run: composer audit
+        run: |
+          for i in 1 2 3; do composer audit && exit 0; echo "composer audit attempt $i failed (likely transient network), retrying in 5s"; sleep 5; done
+          composer audit
 
   tests:
     name: Tests
