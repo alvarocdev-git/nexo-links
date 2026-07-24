@@ -121,4 +121,4 @@ Built by **[alvarocdev.com](https://alvarocdev.com)** — the tech behind Nexo.
 
 ## License & credits
 
-[MIT](LICENSE). Built by **Álvaro Carrizales** — [alvarocdev.com](https://alvarocdev.com).
+[MIT](LICENSE). Built by **Alvaro Carrizales** — [alvarocdev.com](https://alvarocdev.com).
