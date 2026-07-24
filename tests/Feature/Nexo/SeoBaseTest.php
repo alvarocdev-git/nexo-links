@@ -16,7 +16,12 @@ it('serves meta description, canonical, open graph and hreflang on the home page
         ->toContain('hreflang="es"')
         ->toContain('hreflang="en"')
         ->toContain('hreflang="pt"')
-        ->toContain('hreflang="x-default"');
+        ->toContain('hreflang="x-default"')
+        // The component's doc comment must stay a comment (no leaked literal props)
+        // and prop values must be escaped exactly once (no double-encoded entities).
+        ->not->toContain(':hreflang=')
+        ->not->toContain(':noindex=')
+        ->not->toContain('&amp;#0');
 });
 
 it('serves robots.txt with the private surface disallowed and a sitemap pointer', function () {

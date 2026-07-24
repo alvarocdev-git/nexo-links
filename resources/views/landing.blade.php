@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <x-nexo-seo
-        title="{{ config('app.name') }} — {{ __('Your links. Your domain. Your data.') }}"
-        description="{{ __('Open-source link-in-bio page you host yourself, with visitor analytics that don\'t spy on anyone.') }}" />
+        :title="config('app.name').' — '.__('Your links. Your domain. Your data.')"
+        :description="__('Open-source link-in-bio page you host yourself, with visitor analytics that don\'t spy on anyone.')" />
 
     @include('partials.brand-head')
 

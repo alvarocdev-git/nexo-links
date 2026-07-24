@@ -5,8 +5,8 @@
        <x-nexo-seo
            title="Nexo Links — Your links. Your domain. Your data."
            description="Open-source link-in-bio you host yourself…"
-           image="/og-image.png"            {{-- default; from generate-brand-assets --}}
-           :hreflang="true"                  {{-- emit es/en/pt + x-default via ?lang= --}}
+           image="/og-image.png"             (default; from generate-brand-assets)
+           :hreflang="true"                  (emit es/en/pt + x-default via ?lang=)
            :noindex="false" />
 
      Assumes each tool ships /og-image.png + favicons via generate-brand-assets.mjs. --}}
