@@ -6,4 +6,7 @@
 <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 <link rel="manifest" href="{{ asset('site.webmanifest') }}">
-<meta name="theme-color" content="#6366f1">
+{{-- Nexo violet (--nexo-primary / violet-600). A <meta> content can't reference a
+     CSS var, so this literal hex is expected here (brand-head is on the guardian's
+     allow-list). --}}
+<meta name="theme-color" content="#7c3aed">

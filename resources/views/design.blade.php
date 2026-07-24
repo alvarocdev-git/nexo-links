@@ -101,14 +101,14 @@
                         <div>
                             <x-input-label for="background_start" :value="__('Color')" />
                             <input id="background_start" type="color" name="background_start"
-                                   value="{{ old('background_start', $page->background_start ?? '#6366f1') }}"
+                                   value="{{ old('background_start', $page->background_start ?? config('nexo.themes.default.from')) }}"
                                    class="mt-1 h-10 w-16 cursor-pointer rounded border border-gray-300">
                             <x-input-error :messages="$errors->get('background_start')" class="mt-2" />
                         </div>
                         <div x-show="backgroundType === 'gradient'" x-cloak>
                             <x-input-label for="background_end" :value="__('To')" />
                             <input id="background_end" type="color" name="background_end"
-                                   value="{{ old('background_end', $page->background_end ?? '#d946ef') }}"
+                                   value="{{ old('background_end', $page->background_end ?? config('nexo.themes.default.to')) }}"
                                    class="mt-1 h-10 w-16 cursor-pointer rounded border border-gray-300">
                             <x-input-error :messages="$errors->get('background_end')" class="mt-2" />
                         </div>
