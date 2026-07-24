@@ -1,13 +1,21 @@
+<div align="center">
+
+<img src="resources/brand/mark.svg" width="88" alt="Nexo Links isotype">
+
 # Nexo Links
 
 **Your links. Your domain. Your data.**
 
+[![CI](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+</div>
+
+---
+
 Nexo Links is an open-source, self-hosted link-in-bio platform — a Linktree
 alternative you run on your own domain and infrastructure, designed to work
 even on cheap shared hosting (PHP + MySQL).
-
-[![CI](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml/badge.svg)](https://github.com/alvarocdev-git/nexo-links/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Why Nexo Links?
 
@@ -91,6 +99,25 @@ locales live in [config/nexo.php](config/nexo.php).
 - [Wireframes](docs/WIREFRAMES.md)
 - [Deployment guide](docs/DEPLOYMENT.md)
 - [Contributing](CONTRIBUTING.md)
+
+## Nexo ecosystem
+
+Nexo is a family of open-source, self-hostable tools that share one visual identity
+([nexo-brand](https://github.com/nexo-tools)), one optional account
+([Nexo ID](https://github.com/nexo-tools/nexo-id) SSO) and one set of engineering
+standards. Every tool runs **fully standalone** — the ecosystem is opt-in.
+
+| Tool | What it is | Repo |
+| --- | --- | --- |
+| **Nexo Tools** | Ecosystem hub — discover the tools and hop between them with one account | [nexo-tools](https://github.com/nexo-tools/nexo-tools) |
+| **Nexo Links** | Link-in-bio you host yourself (Linktree alternative) | — you are here |
+| **Nexo Agenda** | Bookings for service businesses (AgendaPro / Fresha / Booksy alternative) | [nexo-agenda](https://github.com/nexo-tools/nexo-agenda) |
+| **Nexo Short** | Self-hosted URL shortener | [nexo-short](https://github.com/nexo-tools/nexo-short) |
+| **Nexo Events** | Event tickets and passes | [nexo-events](https://github.com/nexo-tools/nexo-events) |
+| **Nexo ID** | One account for every tool — OAuth 2.0 / OIDC SSO | [nexo-id](https://github.com/nexo-tools/nexo-id) |
+
+New to Nexo? Start at **[nexotools.alvarocdev.com](https://nexotools.alvarocdev.com)**.
+Built by **[alvarocdev.com](https://alvarocdev.com)** — the tech behind Nexo.
 
 ## License & credits
 
